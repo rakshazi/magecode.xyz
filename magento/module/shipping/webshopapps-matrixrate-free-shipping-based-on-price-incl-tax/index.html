@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Webshopapps/Matrixrate free shipping based on price incl. tax - MageCode</title>
+  <meta name="author" content=".h">
+
+  
+  <meta name="description" content="I know, my English is too bad, but I&rsquo;ll try to explain what I mean. What is it? Magento module Webshopapps/Matrixrate allows you to give &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/rss.xml" rel="alternate" title="MageCode" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-51106839-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <img src="/images/ah_frame_transparent.svg" />
+  <h1><a href="/">MageCode</a></h1>
+</hgroup>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Webshopapps/Matrixrate Free Shipping Based on Price Incl. Tax</h1>
+    
+  </header>
+
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/magento/'>magento</a>, <a class='category' href='/blog/categories/module/'>module</a>, <a class='category' href='/blog/categories/shipping/'>shipping</a>
+  
+</span>
+
+
+<div class="entry-content"><p>I know, my English is too bad, but I&rsquo;ll try to explain what I mean.</p>
+
+<h1>What is it?</h1>
+
+<p>Magento module Webshopapps/Matrixrate allows you to give customer free shipping option if order totals will cost more than some money.</p>
+
+<h1>Problem</h1>
+
+<p>This module calculates only products price without included tax.</p>
+
+<p>Example:</p>
+
+<p>You have a store. You have product with base (real) price $8, but with tax (eg: $3) it will cost $11. You set in store settings that on the frontend part for customers must be displayed only price with included tax ($11). And you set in Webshopapps/Matrixrate config that free shipping option must be shown for order amount > $100.</p>
+
+<p>Customer buys 10 products by $11 each, but module will calculate only base (real) price - $8 for each product. In that way, customer will see order total amount as $110 but he will have no free shipping option.</p>
+
+<!--more-->
+
+
+<h1>Solution</h1>
+
+<p>Open your store root dir and then go to the Webshopapps/Matrixrate dir (usually, <code>app/code/community/Webshopapps/Matrixrate</code>). Now open file <code>Model/Carrier/Matrixrate.php</code> and find function <code>collectRates</code> in it (<em>public function collectRates(Mage_Shipping_Model_Rate_Request $request)</em>). Change it to the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">collectRates</span><span class="p">(</span><span class="nx">Mage_Shipping_Model_Rate_Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigFlag</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// exclude Virtual products price from Package value if pre-configured</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigFlag</span><span class="p">(</span><span class="s1">&#39;include_virtual_price&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAllItems</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">foreach</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAllItems</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getParentItem</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getHasChildren</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">isShipSeparately</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getChildren</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$child</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                            <span class="k">if</span> <span class="p">(</span><span class="nv">$child</span><span class="o">-&gt;</span><span class="na">getProduct</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isVirtual</span><span class="p">()</span> <span class="o">||</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getProductType</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;downloadable&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setPackageValue</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPackageValue</span><span class="p">()</span> <span class="o">-</span> <span class="nv">$child</span><span class="o">-&gt;</span><span class="na">getBaseRowTotal</span><span class="p">());</span>
+</span><span class='line'>                            <span class="p">}</span>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>                    <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getProduct</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isVirtual</span><span class="p">()</span> <span class="o">||</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getProductType</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;downloadable&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setPackageValue</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPackageValue</span><span class="p">()</span> <span class="o">-</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getBaseRowTotal</span><span class="p">());</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// Free shipping by qty</span>
+</span><span class='line'>            <span class="nv">$freeQty</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAllItems</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">foreach</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAllItems</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getProduct</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isVirtual</span><span class="p">()</span> <span class="o">||</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getParentItem</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getHasChildren</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">isShipSeparately</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getChildren</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$child</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                            <span class="k">if</span> <span class="p">(</span><span class="nv">$child</span><span class="o">-&gt;</span><span class="na">getFreeShipping</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$child</span><span class="o">-&gt;</span><span class="na">getProduct</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isVirtual</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                                <span class="nv">$freeQty</span> <span class="o">+=</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getQty</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nv">$child</span><span class="o">-&gt;</span><span class="na">getQty</span><span class="p">()</span> <span class="o">-</span> <span class="p">(</span><span class="nb">is_numeric</span><span class="p">(</span><span class="nv">$child</span><span class="o">-&gt;</span><span class="na">getFreeShipping</span><span class="p">())</span> <span class="o">?</span> <span class="nv">$child</span><span class="o">-&gt;</span><span class="na">getFreeShipping</span><span class="p">()</span> <span class="o">:</span> <span class="mi">0</span><span class="p">));</span>
+</span><span class='line'>                            <span class="p">}</span>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>                    <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getFreeShipping</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nv">$freeQty</span> <span class="o">+=</span> <span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getQty</span><span class="p">()</span> <span class="o">-</span> <span class="p">(</span><span class="nb">is_numeric</span><span class="p">(</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getFreeShipping</span><span class="p">())</span> <span class="o">?</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getFreeShipping</span><span class="p">()</span> <span class="o">:</span> <span class="mi">0</span><span class="p">));</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMRConditionName</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setMRConditionName</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;condition_name&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;condition_name&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_default_condition_name</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>             <span class="c1">// Package weight and qty free shipping</span>
+</span><span class='line'>            <span class="nv">$oldWeight</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPackageWeight</span><span class="p">();</span>
+</span><span class='line'>            <span class="nv">$oldQty</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPackageQty</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;allow_free_shipping_promotions&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;include_free_ship_items&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setPackageWeight</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getFreeMethodWeight</span><span class="p">());</span>
+</span><span class='line'>                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setPackageQty</span><span class="p">(</span><span class="nv">$oldQty</span> <span class="o">-</span> <span class="nv">$freeQty</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;shipping/rate_result&#39;</span><span class="p">);</span>
+</span><span class='line'>            <span class="nv">$ratearray</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRate</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nv">$freeShipping</span><span class="o">=</span><span class="k">false</span><span class="p">;</span>
+</span><span class='line'>           <span class="c1">//This workaround needs to correct shipping price calculating,</span>
+</span><span class='line'>           <span class="c1">//Products in Shestore have tax already included in price, but shipping calculates only</span>
+</span><span class='line'>           <span class="c1">//base price, without tax. Following block just changes base prices summ with grand total summ</span>
+</span><span class='line'>           <span class="c1">// (price + tax)</span>
+</span><span class='line'>           <span class="nv">$grandTotal</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>           <span class="nv">$ids</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span> <span class="c1">//$request-&gt;getAllItems() has duplicates, we need to remove them</span>
+</span><span class='line'>           <span class="k">foreach</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAllItems</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$item</span><span class="p">){</span> <span class="c1">//$item-&gt;getQuote()-&gt;getGrandTotal()</span>
+</span><span class='line'>                   <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$ids</span><span class="p">[</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getQuote</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getEntityId</span><span class="p">()])</span> <span class="o">||</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$ids</span><span class="p">[</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getQuote</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getEntityId</span><span class="p">()]))</span>
+</span><span class='line'>                   <span class="p">{</span>
+</span><span class='line'>                           <span class="nv">$ids</span><span class="p">[</span><span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getQuote</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getEntityId</span><span class="p">()]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span><span class='line'>                           <span class="nv">$grandTotal</span> <span class="o">=</span> <span class="nv">$grandTotal</span> <span class="o">+</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getQuote</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getGrandTotal</span><span class="p">();</span>
+</span><span class='line'>                   <span class="p">}</span>
+</span><span class='line'>           <span class="p">}</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nb">is_numeric</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;free_shipping_threshold&#39;</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;free_shipping_threshold&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>                <span class="nv">$grandTotal</span><span class="o">&gt;</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;free_shipping_threshold&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nv">$freeShipping</span><span class="o">=</span><span class="k">true</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;allow_free_shipping_promotions&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>                <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getFreeShipping</span><span class="p">()</span> <span class="o">===</span> <span class="k">true</span> <span class="o">||</span>
+</span><span class='line'>                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPackageQty</span><span class="p">()</span> <span class="o">==</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getFreeBoxes</span><span class="p">()))</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nv">$freeShipping</span><span class="o">=</span><span class="k">true</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nv">$freeShipping</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nv">$method</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;shipping/rate_result_method&#39;</span><span class="p">);</span>
+</span><span class='line'>                <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setCarrier</span><span class="p">(</span><span class="s1">&#39;matrixrate&#39;</span><span class="p">);</span>
+</span><span class='line'>                <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setCarrierTitle</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">));</span>
+</span><span class='line'>                <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="s1">&#39;matrixrate_free&#39;</span><span class="p">);</span>
+</span><span class='line'>                <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setPrice</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">);</span>
+</span><span class='line'>                <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setMethodTitle</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;free_method_text&#39;</span><span class="p">));</span>
+</span><span class='line'>                <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="nv">$method</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;show_only_free&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$ratearray</span> <span class="k">as</span> <span class="nv">$rate</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$rate</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nv">$method</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;shipping/rate_result_method&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setCarrier</span><span class="p">(</span><span class="s1">&#39;matrixrate&#39;</span><span class="p">);</span>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setCarrierTitle</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConfigData</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">));</span>
+</span><span class='line'>                    <span class="nv">$code</span> <span class="o">=</span> <span class="s1">&#39;matrixrate_&#39;</span> <span class="o">.</span> <span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">];</span>
+</span><span class='line'>                    <span class="c1">// If we have set an explicit code on this method, then use that, otherwise fall back on original code</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nv">$code</span> <span class="o">=</span> <span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">];</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="nv">$code</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;logo&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setLogo</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;logo&#39;</span><span class="p">]);</span>
+</span><span class='line'>                    <span class="p">}</span>
+</span><span class='line'>                    <span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setMethodTitle</span><span class="p">(</span><span class="nx">Mage</span><span class="o">::</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;matrixrate&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">__</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;delivery_type&#39;</span><span class="p">]));</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="nv">$shippingPrice</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getFinalPriceWithHandlingFee</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]);</span>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setCost</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]);</span>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setDeliveryType</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;delivery_type&#39;</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setPrice</span><span class="p">(</span><span class="nv">$shippingPrice</span><span class="p">);</span>
+</span><span class='line'>                    <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="nv">$rate</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="nv">$method</span><span class="p">);</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">.h</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-09T14:25:39+00:00" pubdate data-updated="true"></time>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax" data-via="" data-counturl="http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/magento/orders/change-order-status-to-complete" title="Previous Post: Change order status to 'Complete'">&laquo; Change order status to 'Complete'</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <form action="https://www.google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:magecode.xyz" />
+        <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+  
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax">Webshopapps/Matrixrate free shipping based on price incl. tax</a>
+      </li>
+    
+      <li class="post">
+        <a href="/magento/orders/change-order-status-to-complete">Change order status to 'Complete'</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - .h -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'magecode';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax';
+        var disqus_url = 'http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/aharris.js"></script>
+
+</body>
+</html>
