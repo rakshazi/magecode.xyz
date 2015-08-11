@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: module | MageCode]]></title>
+  <title><![CDATA[Category: Module | MageCode]]></title>
   <link href="http://magecode.xyz/blog/categories/module/atom.xml" rel="self"/>
   <link href="http://magecode.xyz/"/>
-  <updated>2015-08-11T16:22:13-04:00</updated>
+  <updated>2015-08-11T17:32:26-04:00</updated>
   <id>http://magecode.xyz/</id>
   <author>
     <name><![CDATA[.h]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Webshopapps/Matrixrate free shipping based on price incl. tax]]></title>
-    <link href="http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax"/>
+    <title type="html"><![CDATA[Webshopapps/Matrixrate Free Shipping Based on Price Incl. Tax]]></title>
+    <link href="http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax"/>
     <updated>2015-08-09T10:25:39-04:00</updated>
-    <id>http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</id>
+    <id>http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</id>
     <content type="html"><![CDATA[<p>I know, my English is too bad, but I&rsquo;ll try to explain what I mean.</p>
 
 <h1>What is it?</h1>

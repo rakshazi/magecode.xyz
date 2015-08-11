@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://magecode.xyz/magento/module/shipping/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</loc>
+    <loc>http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</loc>
     <lastmod>2015-08-09T10:25:39-04:00</lastmod>
   </url>
   <url>
-    <loc>http://magecode.xyz/magento/orders/change-order-status-to-complete</loc>
+    <loc>http://magecode.xyz/blog/change-order-status-to-complete</loc>
     <lastmod>2015-08-09T10:22:28-04:00</lastmod>
   </url>
   <url>
@@ -13,6 +13,9 @@
   </url>
   <url>
     <loc>http://magecode.xyz/</loc>
+  </url>
+  <url>
+    <loc>http://magecode.xyz/blog/categories/</loc>
   </url>
   <url>
     <loc>http://magecode.xyz/blog/categories/magento/</loc>
