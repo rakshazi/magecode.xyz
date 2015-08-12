@@ -18,15 +18,9 @@
     <loc>http://magecode.xyz/blog/categories/</loc>
   </url>
   <url>
-    <loc>http://magecode.xyz/blog/categories/magento/</loc>
-  </url>
-  <url>
     <loc>http://magecode.xyz/blog/categories/orders/</loc>
   </url>
   <url>
-    <loc>http://magecode.xyz/blog/categories/module/</loc>
-  </url>
-  <url>
-    <loc>http://magecode.xyz/blog/categories/shipping/</loc>
+    <loc>http://magecode.xyz/blog/categories/extensions/</loc>
   </url>
 </urlset>
