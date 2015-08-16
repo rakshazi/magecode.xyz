@@ -4,7 +4,7 @@
   <title><![CDATA[MageCode]]></title>
   <link href="http://magecode.xyz/atom.xml" rel="self"/>
   <link href="http://magecode.xyz/"/>
-  <updated>2015-08-16T08:06:18-04:00</updated>
+  <updated>2015-08-16T08:08:47-04:00</updated>
   <id>http://magecode.xyz/</id>
   <author>
     <name><![CDATA[.h]]></name>
@@ -18,9 +18,7 @@
     <link href="http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax"/>
     <updated>2015-08-09T10:25:39-04:00</updated>
     <id>http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</id>
-    <content type="html"><![CDATA[<p>I know, my English is too bad, but I&rsquo;ll try to explain what I mean.</p>
-
-<h1>What is it?</h1>
+    <content type="html"><![CDATA[<h1>What is it?</h1>
 
 <p>Magento module Webshopapps/Matrixrate allows you to give customer free shipping option if order totals will cost more than some money.</p>
 
@@ -28,7 +26,7 @@
 
 <p>This module calculates only products price without included tax.</p>
 
-<p>Example:</p>
+<p>Imagine:</p>
 
 <p>You have a store. You have product with base (real) price $8, but with tax (eg: $3) it will cost $11. You set in store settings that on the frontend part for customers must be displayed only price with included tax ($11). And you set in Webshopapps/Matrixrate config that free shipping option must be shown for order amount > $100.</p>
 
