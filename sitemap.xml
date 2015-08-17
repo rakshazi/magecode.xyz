@@ -12,10 +12,16 @@
     <loc>http://magecode.xyz/blog/archives/</loc>
   </url>
   <url>
+    <loc>http://magecode.xyz/blog/categories/</loc>
+  </url>
+  <url>
     <loc>http://magecode.xyz/</loc>
   </url>
   <url>
-    <loc>http://magecode.xyz/blog/categories/</loc>
+    <loc>http://magecode.xyz/ask/</loc>
+  </url>
+  <url>
+    <loc>http://magecode.xyz/ask/ready.html</loc>
   </url>
   <url>
     <loc>http://magecode.xyz/blog/categories/orders/</loc>
