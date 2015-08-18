@@ -319,6 +319,43 @@ after these actions order status will be changed automatically to &ldquo;Complet
 
 
 
+<div class="donate-another-way" style="display:none">
+	<h1>Please, disable adBlocker on this site</h1>
+	Content of this site is free, because site author get fee from ads.<br /> 
+	There are no popup ads or body-click ads, just Google AdSense block, no more<br />
+	But if you disable ads, author will have no rewards for spending a lot of time to this blog and loose interest to do this.<br />
+	Of course you can <a href="/donate/index.html">donate</a> to the author and in that way you can use AdBlock with clear conscience.<br />
+	Please, disable AdBlock on this site, ads help this blog growing.<br />
+</div>
+
+<script> 
+  
+  // Run after all the page elements have loaded
+  window.onload = function(){ 
+  
+    // This will take care of asynchronous Google ads
+    setTimeout(function() { 
+      
+      // We are targeting the first banner ad of AdSense
+      var ad = document.querySelector("ins.adsbygoogle");
+      var replaceText = document.querySelector("div.donate-another-way");
+      
+      // If the ad contains no innerHTML, ad blockers are at work
+      if (ad && ad.innerHTML.replace(/\s/g, "").length == 0) {
+        
+        // Since ad blocks hide ads using CSS too
+        ad.style.cssText = 'display:block !important; text-decoration: none; color: #0181eb'; 
+        
+        // You can put any text, image or even IFRAME tags here
+        ad.innerHTML = replaceText.innerHTML;
+      
+      }
+      
+    }, 2000); // The ad blocker check is performed 2 seconds after the page load 
+  }; 
+  
+</script>
+
 
 
 </body>
