@@ -9,13 +9,16 @@
     <lastmod>2015-08-09T10:22:28-04:00</lastmod>
   </url>
   <url>
-    <loc>http://magecode.xyz/blog/archives/</loc>
-  </url>
-  <url>
     <loc>http://magecode.xyz/blog/categories/</loc>
   </url>
   <url>
+    <loc>http://magecode.xyz/blog/archives/</loc>
+  </url>
+  <url>
     <loc>http://magecode.xyz/</loc>
+  </url>
+  <url>
+    <loc>http://magecode.xyz/donate/</loc>
   </url>
   <url>
     <loc>http://magecode.xyz/ask/</loc>
