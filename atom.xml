@@ -4,7 +4,7 @@
   <title><![CDATA[MageCode]]></title>
   <link href="http://magecode.xyz/atom.xml" rel="self"/>
   <link href="http://magecode.xyz/"/>
-  <updated>2015-08-21T15:42:28-04:00</updated>
+  <updated>2015-08-21T17:32:58-04:00</updated>
   <id>http://magecode.xyz/</id>
   <author>
     <name><![CDATA[Nikita Kushnir]]></name>
@@ -18,6 +18,9 @@
     <link href="http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax"/>
     <updated>2015-08-09T10:25:39-04:00</updated>
     <id>http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</id>
+    
+        <category scheme="http://magecode.xyz" term="Extensions" />
+    
     <content type="html"><![CDATA[<h1>What is it?</h1>
 
 <p>Magento module Webshopapps/Matrixrate allows you to give customer free shipping option if order totals will cost more than some money.</p>
@@ -40,6 +43,9 @@
     <link href="http://magecode.xyz/blog/change-order-status-to-complete"/>
     <updated>2015-08-09T10:22:28-04:00</updated>
     <id>http://magecode.xyz/blog/change-order-status-to-complete</id>
+    
+        <category scheme="http://magecode.xyz" term="Orders" />
+    
     <content type="html"><![CDATA[<p>You can easily change order status programmaticaly in Magento,
 but you can&rsquo;t do it freely with &ldquo;Complete&rdquo; status
 because you need create invoice and shipment for this,
