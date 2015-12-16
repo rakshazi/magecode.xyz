@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[MageCode]]></title>
-    <link href="/atom.xml" rel="self"/>
-    <link href="/"/>
-    <updated>2015-12-16T19:37:30+00:00</updated>
-    <id>/</id>
+    <link href="http://magecode.xyz/atom.xml" rel="self"/>
+    <link href="http://magecode.xyz/"/>
+    <updated>2015-12-16T19:41:59+00:00</updated>
+    <id>http://magecode.xyz/</id>
     <author>
         <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
     <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Using local repositories to easily install private Magento extensions with Composer]]></title>
-            <link href="/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer"/>
+            <link href="http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer"/>
             <updated>2015-12-14T00:00:00+00:00</updated>
-            <id>/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer</id>
+            <id>http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer</id>
             <author>
                 <name> Barry vd. Heuvel </name>
             </author>
@@ -33,14 +33,14 @@ because you can just require the packages and run composer update. A few advanta
 <li>Keep your Magento dir clean</li>
 <li>Easy to install (‘composer remove’ and the files are really gone)
 
-   <p><a href="/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer" class="btn btn-info pull-right">Read more &raquo;</a></p>
+   <p><a href="http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer" class="btn btn-info pull-right">Read more &raquo;</a></p>
 ]]></content>
         </entry>
             <entry>
             <title type="html"><![CDATA[Webshopapps/Matrixrate free shipping based on price incl. tax]]></title>
-            <link href="/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax"/>
+            <link href="http://magecode.xyz/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax"/>
             <updated>2015-08-09T00:00:00+00:00</updated>
-            <id>/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</id>
+            <id>http://magecode.xyz/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</id>
             <author>
                 <name> Nikita Cherniy </name>
             </author>
@@ -58,7 +58,7 @@ because you can just require the packages and run composer update. A few advanta
 
 <p>Customer buys 10 products by $11 each, but module will calculate only base (real) price - $8 for each product. In that way, customer will see order total amount as $110 but he will have no free shipping option.
 
-   <p><a href="/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax" class="btn btn-info pull-right">Read more &raquo;</a></p>
+   <p><a href="http://magecode.xyz/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax" class="btn btn-info pull-right">Read more &raquo;</a></p>
 ]]></content>
         </entry>
     </feed>
