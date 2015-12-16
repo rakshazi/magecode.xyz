@@ -1,0 +1,17 @@
+language: php
+php:
+- 5.5
+env:
+  global:
+    secure: qBE+Eq15YQ8j6cbL2zOPYqrLHznQwqJX3e35FvJtJgvdk7eadQ7ug9CezszLRhD9KxxHR1BYJVFcyy4nMwADDEPBi8Av5l8UzAYCWMMxxOxuuR+Su1jKIr89IHNNCcmwc4F0K6xPPzgqYSS3G4qHUVtbf+iFIiTWzAmWXWwKjlt7YZVhG5sHGFxmFdR20x4wpbZlwADn+Jkzfydo+KQuJBe2yIhX/5KciuxoOc8LVs3uy6du7cxbuIWMQhHuVBLtpFH9F6wnei4b8KHYzbr3079BeT0DTGPDr+71TNy4VBhdoDQ/hd3YQA1rh0PNQuk1ryEig0EYeuTmaSeCinqT/p9viyjDw/ewHoV8oz8qMJ/zXCib/ngspB+ob79Z0sAPhY07TRxlMzhL7Zlrr5o/kWklqVqTIZQBdz/1ddrtIrdFixjtA7pSL3OiR2Moucx1TrR8QJAXeEDOA/0FAY6oiLwDvObtdWYQdxQA9QZ2+HJz5nY4IS60ovtgF/pfoLa+HGrCEuKlJX0+r1N1fD7kyAl3nnjxzMiao0oD/+JwmV2u7lyl8D4iumlOCPr4W/mM7/4Fqk1PbhILVhu2QQaO0zeXEhxxd0rCaU3NyjTRce8Ui2DmHMQXUTqsLpEygyKB98mJ2MG8nWqLtjqgZSS6BeZRek6gCR8GfjkyMw7e968=
+branches:
+  only:
+    - master
+before_script:
+- composer config -g github-oauth.github.com $GH_TOKEN
+- composer self-update
+- composer install
+script:
+- "./vendor/bin/sculpin generate --env=prod"
+after_success:
+- "./publish.sh"

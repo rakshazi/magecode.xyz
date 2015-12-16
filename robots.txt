@@ -1,7 +1,0 @@
-User-agent: *
-Disallow: redirect.html
-Disallow: ask.html
-Disallow: dontate.html
-Disallow: 404.html
-
-Sitemap: http://magecode.xyz/sitemap.xml

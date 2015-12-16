@@ -1,0 +1,11 @@
+---
+permalink: none
+---
+
+User-agent: *
+Disallow: redirect.html
+Disallow: ask.html
+Disallow: dontate.html
+Disallow: 404.html
+
+Sitemap: {{ site.url }}/sitemap.xml

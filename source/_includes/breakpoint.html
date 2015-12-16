@@ -1,0 +1,5 @@
+{% set break_array = post.blocks.content|split(site.breakpoint, 2) %}
+{{ break_array[0]|raw }}
+{% if break_array|length > 1 %}
+   <p><a href="{{ site.url }}{{ post.url }}" class="btn btn-info pull-right">Read more &raquo;</a></p>
+{% endif %}
