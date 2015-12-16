@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://magecode.xyz/blog/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</loc>
-    <lastmod>2015-08-09T10:25:39-04:00</lastmod>
+    <loc>http://magecode.xyz</loc>
+    <lastmod>2015-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
-  <url>
-    <loc>http://magecode.xyz/blog/change-order-status-to-complete</loc>
-    <lastmod>2015-08-09T10:22:28-04:00</lastmod>
+    <url>
+    <loc>http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer</loc>
+    <lastmod>2015-12-14T00:00:00+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
-  <url>
-    <loc>http://magecode.xyz/blog/categories/</loc>
+    <url>
+    <loc>http://magecode.xyz/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax</loc>
+    <lastmod>2015-08-09T00:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
-  <url>
-    <loc>http://magecode.xyz/blog/archives/</loc>
+    <url>
+    <loc>http://magecode.xyz/2015/08/09/change-order-status-to-complete</loc>
+    <lastmod>2015-08-09T00:00:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
-  <url>
-    <loc>http://magecode.xyz/</loc>
-  </url>
-  <url>
-    <loc>http://magecode.xyz/donate/</loc>
-  </url>
-  <url>
-    <loc>http://magecode.xyz/ask/</loc>
-  </url>
-  <url>
-    <loc>http://magecode.xyz/ask/ready.html</loc>
-  </url>
-  <url>
-    <loc>http://magecode.xyz/blog/categories/orders/</loc>
-  </url>
-  <url>
-    <loc>http://magecode.xyz/blog/categories/extensions/</loc>
-  </url>
-</urlset>
+  </urlset>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[MageCode]]></title>
+    <link href="http://magecode.xyz/atom.xml" rel="self"/>
+    <link href="http://magecode.xyz/"/>
+    <updated>2015-12-16T17:25:54+02:00</updated>
+    <id>http://magecode.xyz/</id>
+    <author>
+        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+    <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Using local repositories to easily install private Magento extensions with Composer]]></title>
+            <link href="http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer"/>
+            <updated>2015-12-14T00:00:00+02:00</updated>
+            <id>http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer</id>
+            <author>
+                <name> Barry vd. Heuvel </name>
+            </author>
+            <content type="html"><![CDATA[<p>There are a few ways to handle Magento extensions, for example:</p>
+
+<ul>
+<li>Magento Connect</li>
+<li>Copying files in the Magento directory</li>
+<li>Use Composer (with composer-installer)</li>
+</ul>
+
+<p>I’m a fan of using Composer (in- and outside Magento), so I like to use that option.
+This works great for free packages listed on Magento connect or <a href="http://packages.firegento.com">Firegento Packages</a>,
+because you can just require the packages and run composer update. A few advantages over the other 2 options:</p>
+
+<ul>
+<li>Easier to update packages (run ‘composer update’)</li>
+<li>Keep your Magento dir clean</li>
+<li>Easy to install (‘composer remove’ and the files are really gone)
+
+   <p><a href="http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer" class="btn btn-info pull-right">Read more &raquo;</a></p>
+]]></content>
+        </entry>
+    </feed>

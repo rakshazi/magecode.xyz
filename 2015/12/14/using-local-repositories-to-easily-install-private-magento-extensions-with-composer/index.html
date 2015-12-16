@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Using local repositories to easily install private Magento extensions with Composer &mdash; MageCode &mdash; Taming Magento.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="http://magecode.xyz/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="http://magecode.xyz/components/highlightjs/styles/github.css" />
+        <link href="http://magecode.xyz/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://magecode.xyz/css/style.css" rel="stylesheet" type="text/css" />
+                    <link rel="alternate" type="application/atom+xml" href="http://magecode.xyz/atom.xml" title="MageCode activity feed" />
+                <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+                                    </head>
+    <body>
+        <div id="wrapper">
+        <!-- Sidebar -->
+        <!-- ---
+use:
+    - posts_categories
+--- -->
+
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand"><a href="/">MageCode</a></li>
+                    <form action="http://www.google.com" id="cse-search-box" target="_blank">
+              <div>
+                <fieldset role="search">
+                <input type="hidden" name="cx" value="partner-pub-5549091042676165:3410918337" />
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="text" class="search form-control" name="q"/>
+                <!--<input type="submit" name="sa" value="Search" />-->
+                </fieldset>
+              </div>
+            </form>
+                <li><a href="http://magecode.xyz/categories/extensions">Extensions</a></li>
+        <li><a href="http://magecode.xyz/categories/orders">Orders</a></li>
+        <li class="social-links"><a href="https://facebook.com/magecode.xyz" target="_blank" title="Facebook"><i class="fa fa-facebook-square"></i></a>
+<a href="https://medium.com/@nikus" target="_blank" title="Medium"><i class="fa fa-medium"></i></a>
+<a href="https://twitter.com/magecode_xyz" target="_blank" title="Twitter"><i class="fa fa-twitter-square"></i></a>
+<a href="http://magecode.xyz/atom.xml" target="_blank" title="RSS feed"><i class="fa fa-rss-square"></i></a>
+</li>
+        <li><a href="http://magecode.xyz/donate"><b>Dontate</b></a></li>
+        <li><a href="http://magecode.xyz/ask">Ask</a></li>
+        <!--  -->
+
+                    <ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5549091042676165" data-ad-slot="2814305939"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </ul>
+</div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="row">
+                        <h1>
+                            <a href="#menu-toggle" class="btn btn-default btn-lg" id="menu-toggle">
+                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                            </a>
+                            MageCode
+                             <small>Taming Magento.</small>                         </h1>
+                    </div>
+                    <div class="row">
+                            <article>
+        <header>
+            <h2>
+                Using local repositories to easily install private Magento extensions with Composer
+                                    <small>
+                                                    <a href="http://magecode.xyz/categories/extensions">#extensions</a>
+                                                                        </small>
+                            </h2>
+        </header>
+        <div>
+            <p>There are a few ways to handle Magento extensions, for example:</p>
+
+<ul>
+<li>Magento Connect</li>
+<li>Copying files in the Magento directory</li>
+<li>Use Composer (with composer-installer)</li>
+</ul>
+
+<p>I’m a fan of using Composer (in- and outside Magento), so I like to use that option.
+This works great for free packages listed on Magento connect or <a href="http://packages.firegento.com">Firegento Packages</a>,
+because you can just require the packages and run composer update. A few advantages over the other 2 options:</p>
+
+<ul>
+<li>Easier to update packages (run ‘composer update’)</li>
+<li>Keep your Magento dir clean</li>
+<li>Easy to install (‘composer remove’ and the files are really gone)
+<!-- break --></li>
+</ul>
+
+<p>Magento Connect packages are listed in the connect20 namespace,
+so your composer.json file could like something like this:</p>
+
+<pre><code class="json">{
+    "require": {
+        "magento-hackathon/magento-composer-installer": "3.0.*",
+        "connect20/aschroder_smtppro": "~2.0.6",
+        "yireo/yireo_newrelic": "~1.2.3"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ]
+}
+</code></pre>
+
+<p>If you want te learn more about this,
+checkout the <a href="https://github.com/Cotya/magento-composer-installer#further-information">readme of the composer-installer project</a>.
+If you want to know about my specific setup, let me know and I might write a blogpost about it :)</p>
+
+<h2 id="private-packages">Private packages</h2>
+
+<p>This is all great for public packages, which are download through the Firegento repository.
+But what about private packages? Ideally we could also use Composer for the packages we purchase.
+But there are 2 common problems:</p>
+
+<ul>
+<li>They aren’t prepared for composer (or modman) usage.</li>
+<li>They aren’t listed on a public repository.</li>
+</ul>
+
+<p>In this blog I’d like to explain how to tackle these 2 problems, so you can keep using the Composer workflow.</p>
+
+<h3 id="making-the-module-installable-by-composer">Making the module installable by composer</h3>
+
+<p>There are 2 things required to make a module installable by the Composer installer:</p>
+
+<ul>
+<li>It needs a mapping between the source + destination files (either package.xml or modman file)</li>
+<li>It needs a composer.json file</li>
+</ul>
+
+<p>A package.xml file is usually present for the Magento Connect packages and a modman is used for Github/Firegento modules.
+Private packages usually lack both, so we’re going to create a modman file.
+There are multiple ways to do this, but I favor a <a href="https://github.com/netz98/n98-magerun">Magerun</a> command that I’ve written myself: https://github.com/fruitcakestudio/magerun-modman</p>
+
+<p>After installing the Magerun Modman module,
+you can type ‘n98-magerun.phar modman:generate’ to scan a directory and generate the modman output.
+Just save the output to a file called ‘modman’ and you are done. See this <a href="http://ceckoslab.com/magento/magento-generate-modman-files/">blog</a> for other methods.</p>
+
+<p>Now we just need to create a composer.json file.
+This is just like any other composer.json, except that the type is ‘magento-module’.
+Just run <code>composer init — type=”magento-module”</code> and answer the interactive questions.</p>
+
+<h3 id="setting-a-repository-for-the-module">Setting a repository for the module</h3>
+
+<p>Traditionally, there were 2 common options to create a repository:</p>
+
+<ul>
+<li>Use Satis to setup a private repository</li>
+<li>Link to a private Git repository</li>
+</ul>
+
+<p>Both options work, but I found them to be a bit cumbersome.
+You have to manage the access to those (satis and git) repositories, through passwords and/or public keys.
+So each server (development, staging, production) would need to be added.
+And on every change of server, multiple repos need changing.</p>
+
+<p>Luckily, a week ago a new feature was added to Composer: Path repositories (so remember to run <code>composer self-update</code>).
+This means that you can use a local path to define a repository.
+Eg. we can just create an ’extensions’ directory, put our private extensions there and point our composer.json to it.
+We can include these packages in our Git repository for our shop and they will be symlinked upon install.
+You can use a wildcards for your folder, so ‘extensions/namespace/module’ could simply be ‘extensions/<em>/</em>’.</p>
+
+<p>Example:</p>
+
+<pre><code class="json">{
+    "require": {
+        "magento-hackathon/magento-composer-installer": "3.0.*",
+        "amasty/customer-attributes": "*@dev",
+        "connect20/aschroder_smtppro": "~2.0.6",
+        "yireo/yireo_newrelic": "~1.2.3"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        },
+        {
+            "type": "path",
+            "url": "extensions/*/*"
+        }
+    ]
+}
+</code></pre>
+
+<p>Note that we store the Amasty Customer Attributes directory in a path ‘extensions/amasty/customer-attributes’,
+relative from our root composer.json file.
+When creating the composer.json for this package (see above), we named it ‘amasty/customer-attributes’.
+You can pick any name you want, as long as you remember to use the same one in both composer files..</p>
+
+<blockquote>
+  <p>Note: Since this <a href="https://github.com/composer/composer/pull/4422">PR</a> is merged,
+  it’s possible to use wildcards in the path name possible, so the above example is updated to reflect this.</p>
+</blockquote>
+
+<h2 id="a-complete-example">A complete example</h2>
+
+<p>Let’s pick the Amasty module as a complete step-by-step example.</p>
+
+<h3 id="my-setup">My setup</h3>
+
+<p>You can configure your setup just how you like it, but mine is roughly something like this:</p>
+
+<pre><code>.git/            # Our git repo
+extensions/      # Were we place our modules
+extensions/&lt;namespace&gt;/&lt;package&gt;/composer.json # Example package
+htdocs/          # The public root or 'magento folder'
+vendor/          # The vendor dir for Composer
+composer.json    # The composer.json file with our packages
+composer.lock    # The exact versions of our packages
+</code></pre>
+
+<blockquote>
+  <p>The vendor dir is excluded from Git, but composer.lock included.
+  So upon deployment, we run <code>composer install</code> to get exactly the same packages.</p>
+</blockquote>
+
+<h3 id="the-private-package">The Private Package</h3>
+
+<p>As said, we’ll pick <a href="https://amasty.com/customer-attributes.html">Amasty Customer Attributes</a> as example here,
+but most private packages are similar.
+Most have an installation guide, manual, license and a bunch of actual module files.
+In this case, split up in ‘Step 1’ and ‘Step 2’ (No idea why)</p>
+
+<p><img src="/media/posts/2015-12-14-using-local-repositories-to-easily-install-private-magento-extensions-with-composer/files-before.jpeg" alt="Files - before" /></p>
+
+<p>We need the app/js/lib/skin files to be copied/symlinked in our magento folder, but we don’t need the pdf/txt files.
+I usually like to make a ‘src’ dir for the actual module files and keep the rest in the root.
+So we copy Step1 and Step2 to a new ‘src’ dir.</p>
+
+<p><img src="/media/posts/2015-12-14-using-local-repositories-to-easily-install-private-magento-extensions-with-composer/files-after.jpeg" alt="Files - after" /></p>
+
+<p>Now we need to create a modman files, to map all our src/* files to to correct path.
+Using my <a href="https://github.com/fruitcakestudio/magerun-modman">Modman Magerun</a> module,
+run: <code>n98-magerun.phar modman:generate -d src &gt; modman</code> in that directory.
+That creates a file <code>modman</code>, something similar to below:</p>
+
+<pre><code>src/app/code/local/Amasty/Base                            app/code/local/Amasty/Base                           
+src/app/code/local/Amasty/Customerattr                    app/code/local/Amasty/Customerattr                   
+src/app/code/local/Mage/Customer/Block/Form/Register.php  app/code/local/Mage/Customer/Block/Form/Register.php
+src/app/design/adminhtml/default/default/layout/amasty    app/design/adminhtml/default/default/layout/amasty   
+src/app/design/adminhtml/default/default/template/amasty  app/design/adminhtml/default/default/template/amasty
+src/app/design/frontend/base/default/layout/amasty        app/design/frontend/base/default/layout/amasty       
+src/app/design/frontend/base/default/template/amasty      app/design/frontend/base/default/template/amasty     
+src/app/etc/modules/Amasty_Base.xml                       app/etc/modules/Amasty_Base.xml                      
+src/app/etc/modules/Amasty_Customerattr.xml               app/etc/modules/Amasty_Customerattr.xml              
+src/app/locale/en_US/Amasty_Customerattr.csv              app/locale/en_US/Amasty_Customerattr.csv             
+src/js/amasty/ambase                                      js/amasty/ambase                                     
+src/lib/Varien/Data/Form/Element/Boolean.php              lib/Varien/Data/Form/Element/Boolean.php             
+src/lib/Varien/Data/Form/Element/Multiselectimg.php       lib/Varien/Data/Form/Element/Multiselectimg.php      
+src/lib/Varien/Data/Form/Element/Selectimg.php            lib/Varien/Data/Form/Element/Selectimg.php           
+src/skin/adminhtml/default/default/css/amasty             skin/adminhtml/default/default/css/amasty            
+src/skin/adminhtml/default/default/images/ambase          skin/adminhtml/default/default/images/ambase         
+src/skin/frontend/base/default/images/fam_bullet_disk.gif skin/frontend/base/default/images/fam_bullet_disk.gif
+</code></pre>
+
+<blockquote>
+  <p>Note: I use a ‘src’ dir, hence the ‘-d src’ flag and the src/app/code/.. → app/code/.. mapping.
+  You can just leave everything in the root if you want.
+  2 templates paths were left out the gist, because of the long length.</p>
+</blockquote>
+
+<p>As you may have noticed, this module overwrites files in lib/Varien and app/code/local/Mage.
+This isn’t very nice and you have to look out for this in your modman file!
+Don’t symlink those folder to strict, you can edit the modman file manually if you need to.</p>
+
+<p><strong>Magento Package Developers: Please save us the trouble and supply your modules with a package.xml or modman files. Thank you!</strong></p>
+
+<p>Once we’re happy with the modman file, generate the composer.json by running <code>composer init</code> and answer the questions.
+Make sure the type is magento-module.</p>
+
+<p><img src="/media/posts/2015-12-14-using-local-repositories-to-easily-install-private-magento-extensions-with-composer/composer-init.jpeg" alt="Running composer init" /></p>
+
+<p>Now we just save the module folder in <code>extensions/amasty/customer-attributes</code>,
+add this path as local repository and require the <code>*@dev</code> version.
+Run <code>composer update</code> and it will symlink the extension directory + install the module!</p>
+
+<pre><code class="json">{
+    "require": {
+        "magento-hackathon/magento-composer-installer": "3.0.*",
+        "amasty/customer-attributes": "*@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "extensions/*/*"
+        }
+    ]
+}
+</code></pre>
+
+<p>That should about wrap this up!
+Don’t forget to <code>composer self-update</code> before trying (on all your servers), otherwise it will fail.
+Using this method has a few advantages:</p>
+
+<ul>
+<li>Keep your modules in sync with your Magento</li>
+<li>No extra private repositories to manage</li>
+<li>Faster than cloning many repos</li>
+<li>Keep your installation clean (1 dir with all module files)</li>
+<li>Easy to uninstall (no leftover files)</li>
+</ul>
+
+<p>And to be fair, here are some downsides to consider:</p>
+
+<ul>
+<li>3rd party code in your repository</li>
+<li>No central place to update your modules</li>
+</ul>
+
+<h2 id="and-magento-2%3F">And Magento 2?</h2>
+
+<p>Just to take a quick look ahead to the Magento 2 ecosystem: it would seem that most of this isn’t needed for Magento2,
+because Magento will use Composer by default and provide their own repository for both paid and free modules.
+However, it is possible that not everyone will be using this (perhaps because of the pricing?), so this method could still apply..</p>
+
+        </div>
+                                    <a href="http://magecode.xyz/tags/composer" class="badge">composer</a>                    
+        Author:
+                    <a href="https://medium.com/@barryvdh" rel="nofollow" target="_blank">Barry vd. Heuvel</a>
+        
+        <div class="sharing">
+            <a href="//twitter.com/share" class="twitter-share-button" data-url="http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer" data-via="magecode_xyz" data-counturl="http://magecode.xyz/2015/12/14/using-local-repositories-to-easily-install-private-magento-extensions-with-composer" >Tweet</a>
+            <div class="g-plusone" data-size="medium"></div>
+            <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+            <div id="fb-root"></div>
+        </div>
+
+                    <nav>
+                <ul class="pagination">
+                                    <li>
+                        <a href="http://magecode.xyz/2015/08/09/webshopapps-matrixrate-free-shipping-based-on-price-incl-tax" aria-label="Previous: Webshopapps/Matrixrate free shipping based on price incl. tax">
+                            <span aria-hidden="true">&laquo; Webshopapps/Matrixrate free shipping based on price incl. tax</span>
+                        </a>
+                    </li>
+                
+                                </ul>
+            </nav>
+            </article>
+
+    
+            <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'magecode'; // required: replace example with your forum shortname
+                                                
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+        </noscript>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2015 MageCode
+        </footer>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://magecode.xyz/components/jquery/jquery.min.js"><\/script>')</script>
+    <script src="http://magecode.xyz/components/bootstrap/js/bootstrap.min.js"></script>
+
+        
+            <script type="text/javascript">
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-66233712-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+    <script src="http://magecode.xyz/components/highlightjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+            <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+    
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+    </body>
+</html>
