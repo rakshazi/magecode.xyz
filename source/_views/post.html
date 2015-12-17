@@ -1,5 +1,21 @@
 {% extends "default" %}
 
+{% block meta_ogp %}
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ site.url }}/{{ page.url }}" />
+    <meta property="og:title" content="{{ page.title }}" />
+    <meta property="og:description" content="{{ page.blocks.content|raw|striptags[:150] }}" />
+    <meta property="og:article:published_time" content="{{ page.date }}" />
+    <meta property="og:article:author" content="{% if page.author.name %}{{ page.author.name }}{% else %}{{ site.author.name }}{% endif %}" />
+    <meta property="og:article:section" content="Technology" />
+    {% for category in page.categories %}
+        <meta property="og:article:tag" content="{{ category }}" />
+    {% endfor %}
+    {% for tag in page.tags %}
+        <meta property="og:article:tag" content="{{ tag }}" />
+    {% endfor %}
+{% endblock %}
+
 {% block content_wrapper %}
     <article>
         <header>
@@ -18,20 +34,24 @@
         <div>
             {{ page.blocks.content|raw }}
         </div>
-        {% if page.tags %}
-            {% for tag in page.tags %}
-                <a href="{{ site.url }}/tags/{{ tag|url_encode(true) }}" class="badge">{{ tag }}</a>{% if not loop.last %}, {% endif %}
-            {% endfor %}
-        {% endif %}
+        <div class="row">
+            {% if page.tags %}
+                {% for tag in page.tags %}
+                    <a href="{{ site.url }}/tags/{{ tag|url_encode(true) }}" class="badge">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
 
-        Author:
-        {% if page.author.name and page.author.url %}
-            <a href="{{ page.author.url }}" rel="nofollow" target="_blank">{{ page.author.name }}</a>
-        {% else %}
-            <a href="{{ site.author.url }}" rel="nofollow" target="_blank">{{ site.author.name }}</a>
-        {% endif %}
+        <div class="row">
+            Author:
+            {% if page.author.name and page.author.url %}
+                <a href="{{ page.author.url }}" rel="nofollow" target="_blank">{{ page.author.name }}</a>
+            {% else %}
+                <a href="{{ site.author.url }}" rel="nofollow" target="_blank">{{ site.author.name }}</a>
+            {% endif %}
+        </div>
 
-        <div class="sharing">
+        <div class="row">
             <a href="//twitter.com/share" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="{{ site.services.twitter }}" data-counturl="{{ site.url }}{{ page.url }}" >Tweet</a>
             <div class="g-plusone" data-size="medium"></div>
             <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
@@ -117,5 +137,11 @@
       twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('table').addClass('table table-bordered table-hover');
+    });
   </script>
 {% endblock%}

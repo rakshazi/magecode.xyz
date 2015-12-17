@@ -136,3 +136,7 @@
 .social-links a:hover {
     background-color: transparent !important;
 }
+
+pre code {
+    background-color: inherit;
+}
