@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[MageCode]]></title>
+    <link href="http://magecode.xyz/atom.xml" rel="self"/>
+    <link href="http://magecode.xyz/"/>
+    <updated>2015-12-17T19:18:01+00:00</updated>
+    <id>http://magecode.xyz/</id>
+    <author>
+        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+    <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Load single product attribute vs. load entire product]]></title>
+            <link href="http://magecode.xyz/2015/12/17/load-single-product-attribute-vs-load-entire-product"/>
+            <updated>2015-12-17T00:00:00+00:00</updated>
+            <id>http://magecode.xyz/2015/12/17/load-single-product-attribute-vs-load-entire-product</id>
+            <author>
+                <name> Tsvetan Stoychev </name>
+            </author>
+            <content type="html"><![CDATA[<p>Let’s assume that as developer you are in following situation:
+You know a product id and you have to fetch single attribute value of a product which id you already know.
+For example let’s try to get color attribute of Magento product.</p>
+
+<p><strong>Question</strong>: How would you do it?
+Are you going to load the product or you would look for more efficient solutions in order to fetch only the attribute you are looking for?</p>
+
+<p>Magento allows us to fetch product attribute in many ways and depending on the context we could choose one.
+I am definitely against loading entire product in case there are much more efficient solutions and the goal is to fetch single product attribute
+(not all product attributes).</p>
+
+<p>I think that people choose the easy way because:</p>
+
+<ul>
+<li>People read the first answer (which sometimes is not the most efficient) in StackOverflow but don’t check other answers.</li>
+<li>There is a lack of Magento documentation.</li>
+<li>Missing out of the box way how to accomplish the task.</li>
+<li>There are many examples in Internet but they are not descriptive enough to explain what happens on background and how efficient they are.</li>
+</ul>
+
+<p>As first example,
+I would like to start with one of the efficient ways because I know many people would copy / paste this solution in their project,
+stop reading and continue with their daily work.
+
+   <p><a href="http://magecode.xyz/2015/12/17/load-single-product-attribute-vs-load-entire-product" class="btn btn-info pull-right">Read more &raquo;</a></p>
+]]></content>
+        </entry>
+    </feed>

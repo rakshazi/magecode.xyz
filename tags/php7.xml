@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[MageCode]]></title>
+    <link href="http://magecode.xyz/atom.xml" rel="self"/>
+    <link href="http://magecode.xyz/"/>
+    <updated>2015-12-17T19:18:02+00:00</updated>
+    <id>http://magecode.xyz/</id>
+    <author>
+        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+    <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Compatibility extension for Magento 1 and PHP 7]]></title>
+            <link href="http://magecode.xyz/2015/12/17/compatibility-extension-for-magento-1-and-php-7"/>
+            <updated>2015-12-17T00:00:00+00:00</updated>
+            <id>http://magecode.xyz/2015/12/17/compatibility-extension-for-magento-1-and-php-7</id>
+            <author>
+                <name> Ivan Curdinjakovic </name>
+            </author>
+            <content type="html"><![CDATA[<p>As promised,  we prepared something that will spice up your holidays better than Christmas decorations and mulled wine.
+In this article you can find <strong>our open-source compatibility extension for Magento and PHP 7</strong> (yes, you read that right!)
+as well as some of the experiences and performance tests.</p>
+
+<p>We, at Inchoo, already have a few Magento 1 projects running fine on development servers with PHP 7. <em>It’s alive</em>, we say!</p>
+
+<h4 id="and-quite-lively%2C-actually.">And quite lively, actually.</h4>
+
+<p>Despite the official status, Magento 1 loves working on a server with PHP 7. And we love PHP 7.
+
+   <p><a href="http://magecode.xyz/2015/12/17/compatibility-extension-for-magento-1-and-php-7" class="btn btn-info pull-right">Read more &raquo;</a></p>
+]]></content>
+        </entry>
+    </feed>

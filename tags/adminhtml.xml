@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[MageCode]]></title>
+    <link href="http://magecode.xyz/atom.xml" rel="self"/>
+    <link href="http://magecode.xyz/"/>
+    <updated>2015-12-17T19:18:02+00:00</updated>
+    <id>http://magecode.xyz/</id>
+    <author>
+        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+    <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Magento chooser widget in adminhtml forms]]></title>
+            <link href="http://magecode.xyz/2015/12/17/magento-chooser-widget-in-adminhtml-forms"/>
+            <updated>2015-12-17T00:00:00+00:00</updated>
+            <id>http://magecode.xyz/2015/12/17/magento-chooser-widget-in-adminhtml-forms</id>
+            <author>
+                <name> Tsvetan Stoychev </name>
+            </author>
+            <content type="html"><![CDATA[<p><img src="/media/posts/2015-12-17-magento-chooser-widget-in-adminhtml-forms/chooser.png" alt="Product chooser" /></p>
+
+<p>Magento extension that gives the ability to create Product, Category, CMS Page and Static Block choosers in generic admin forms.
+
+   <p><a href="http://magecode.xyz/2015/12/17/magento-chooser-widget-in-adminhtml-forms" class="btn btn-info pull-right">Read more &raquo;</a></p>
+]]></content>
+        </entry>
+    </feed>

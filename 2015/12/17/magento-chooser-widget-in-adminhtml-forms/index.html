@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><title>Magento chooser widget in adminhtml forms &mdash; MageCode &mdash; Taming Magento.</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:type" content="article" /><meta property="og:url" content="http://magecode.xyz//2015/12/17/magento-chooser-widget-in-adminhtml-forms" /><meta property="og:title" content="Magento chooser widget in adminhtml forms" /><meta property="og:description" content=" Magento extension that gives the ability to create Product, Category, CMS Page and Static Block choosers in generic admin forms. There are 4 impor" /><meta property="og:article:published_time" content="1450310400" /><meta property="og:article:author" content="Tsvetan Stoychev" /><meta property="og:article:section" content="Technology" /><meta property="og:article:tag" content="extensions" /><meta property="og:article:tag" content="adminhtml" /><meta property="og:article:tag" content="widget" /><meta property="og:article:tag" content="form" /><meta property="og:image" content="http://magecode.xyz/media/logo.png" /><link rel="alternate" type="application/atom+xml" href="http://magecode.xyz/atom.xml" title="MageCode activity feed" /></head><body><div id="wrapper"><!-- Sidebar --><!-- --- use: - posts_categories --- --><div id="sidebar-wrapper"><ul class="sidebar-nav"><li class="sidebar-brand"><a href="/">MageCode</a></li><form action="http://www.google.com" id="cse-search-box" target="_blank"><div><fieldset role="search"><input type="hidden" name="cx" value="partner-pub-5549091042676165:3410918337" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" class="search form-control" name="q"/><!--<input type="submit" name="sa" value="Search" />--></fieldset></div></form><li><a href="http://magecode.xyz/categories/extensions">Extensions</a></li><li><a href="http://magecode.xyz/categories/perfomance">Perfomace</a></li><li><a href="http://magecode.xyz/categories/fixed">Fixed</a></li><li><a href="http://magecode.xyz/categories/orders">Orders</a></li><li class="social-links"><a href="https://facebook.com/magecode.xyz" target="_blank" title="Facebook"><i class="fa fa-facebook-square"></i></a><a href="https://medium.com/@nikus" target="_blank" title="Medium"><i class="fa fa-medium"></i></a><a href="https://twitter.com/magecode_xyz" target="_blank" title="Twitter"><i class="fa fa-twitter-square"></i></a><a href="http://magecode.xyz/atom.xml" target="_blank" title="RSS feed"><i class="fa fa-rss-square"></i></a></li><li><a href="http://magecode.xyz/donate"><b>Donate</b></a></li><li><a href="http://magecode.xyz/ask">Ask</a></li><!-- --><ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5549091042676165" data-ad-slot="2814305939"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></ul></div><div id="page-content-wrapper"><div class="container-fluid"><div class="col-md-12"><div class="row"><h1><a href="#menu-toggle" class="btn btn-default btn-lg" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span></a> MageCode <small>Taming Magento.</small></h1></div><div class="row"><article><header><h2> Magento chooser widget in adminhtml forms <small><a href="http://magecode.xyz/categories/extensions">#extensions</a></small></h2></header><div><p><img src="/media/posts/2015-12-17-magento-chooser-widget-in-adminhtml-forms/chooser.png" alt="Product chooser" /></p><p>Magento extension that gives the ability to create Product, Category, CMS Page and Static Block choosers in generic admin forms. <!-- break --></p><p>There are 4 important things you need to do to make the chooser work:</p><p>It's required to add in the layout update a handle called <code>editor</code>. This handle includes the JS logic that is needed to render the chooser popups</p><pre><code class="xml">&lt;?xml version="1.0"?&gt;
+&lt;layout&gt;
+
+    &lt;adminhtml_my_module_item_edit&gt;
+        &lt;reference name="content"&gt;
+            &lt;block type="my_module/adminhtml_item_edit" name="item_edit" /&gt;
+        &lt;/reference&gt;
+        &lt;update handle="editor"/&gt;
+    &lt;/adminhtml_my_module_item_edit&gt;
+
+&lt;/layout&gt;
+</code></pre><p>After that in method <code>_prepareForm()</code> of your admin form you need to have an instance of helper <code>jarlssen_chooser_widget/chooser</code> and pass some parameters to the function creating the chooser.</p><p>Use any of the chooser create functions of <code>Jarlssen_ChooserWidget_Helper_Chooser</code>:</p><ul><li>createProductChooser</li><li>createCategoryChooser</li><li>createCmsPageChooser</li><li>createCmsBlockChooser</li><li>createChooser</li></ul><p>There is a required config value called <code>input_name</code> and must be passed to the chooser through a configuration array.</p><p>The function creating the chooser accepts the following parameters:</p><ul><li><strong>$model</strong> - instance of <code>Mage_Core_Model_Abstract</code> - the current entity</li><li><strong>$fieldset</strong> - instance of <code>Varien_Data_Form_Element_Fieldset</code> - It’s required, because we create the chooser in this fieldset</li><li><strong>$config</strong> - array of the widget configuration, the element <code>input_name</code> is required, because this is the name of the field name, that we save after form submit.</li><li><strong>$blockAlias</strong> - this parameter is used only when we invoke <code>Jarlssen_ChooserWidget_Helper_Chooser::createChooser()</code> and it’s useful for creating our own custom chooser</li></ul><p>The array $config also can contain more elements, but they are not mandatory:</p><ul><li><strong>'input_label'</strong> - The text of the input label</li><li><strong>'button_text'</strong> - The text of the chooser button</li><li><strong>'required'</strong> - If it’s true, then we will have frontend validation and to pass it we need to choose something from the chooser</li><li><strong>'input_id'</strong> - If you don't specify this parameter the input id will be same as the input name. Thanks to <a href="https://github.com/bmcg">bmcg</a> for his pull request. He found, that useful when he want's to have input name, that contains square brackets.</li></ul><p>Example of config array:</p><pre><code class="php">$productConfig = array(
+    'input_name'  =&gt; 'entity_link',
+    'input_label' =&gt; $this-&gt;__('Product'),
+    'button_text' =&gt; $this-&gt;__('Select Product...'),
+    'required'    =&gt; true,
+    'input_id'    =&gt; 'my_custom_id'
+);
+</code></pre><h4 id="code-examples">Code Examples</h4><p>Product Chooser:</p><pre><code class="php">$chooserHelper = Mage::helper('jarlssen_chooser_widget/chooser');
+
+$productConfig = array(
+    'input_name'  =&gt; 'entity_link',
+    'input_label' =&gt; $this-&gt;__('Product'),
+    'button_text' =&gt; $this-&gt;__('Select Product...'),
+    'required'    =&gt; true
+);
+
+$chooserHelper-&gt;createProductChooser($model, $fieldset, $productConfig);
+</code></pre><p>Category Chooser:</p><pre><code class="php">$chooserHelper = Mage::helper('jarlssen_chooser_widget/chooser');
+
+$categoryConfig = array(
+    'input_name'  =&gt; 'entity_link',
+    'input_label' =&gt; $this-&gt;__('Category'),
+    'button_text' =&gt; $this-&gt;__('Select Category...'),
+    'required'    =&gt; true
+);
+
+$chooserHelper-&gt;createCategoryChooser($model, $fieldset, $categoryConfig);
+</code></pre><p>Static Block Chooser:</p><pre><code class="php">$chooserHelper = Mage::helper('jarlssen_chooser_widget/chooser');
+
+$blockConfig = array(
+    'input_name'  =&gt; 'entity_link',
+    'input_label' =&gt; $this-&gt;__('Block'),
+    'button_text' =&gt; $this-&gt;__('Select Block...'),
+    'required'    =&gt; true
+);
+
+$chooserHelper-&gt;createCmsBlockChooser($model, $fieldset, $blockConfig);
+</code></pre><p>CMS Page Chooser:</p><pre><code class="php">$chooserHelper = Mage::helper('jarlssen_chooser_widget/chooser');
+
+$cmsPageConfig = array(
+    'input_name'  =&gt; 'entity_link',
+    'input_label' =&gt; $this-&gt;__('CMS Page'),
+    'button_text' =&gt; $this-&gt;__('Select CMS Page…'),
+    'required'    =&gt; true
+);
+
+$chooserHelper-&gt;createCmsPageChooser($model, $fieldset, $cmsPageConfig);
+</code></pre><p>Custom Chooser:</p><pre><code class="php">$chooserHelper = Mage::helper('jarlssen_chooser_widget/chooser');
+
+$customChooserConfig = array(
+    'input_name'  =&gt; 'entity_link',
+    'input_label' =&gt; $this-&gt;__('Custom entity'),
+    'button_text' =&gt; $this-&gt;__('Select entity…'),
+    'required'    =&gt; true
+);
+
+$chooserBlock = 'custom_module/chooser';
+
+$chooserHelper-&gt;createChooser($model, $fieldset, $customChooserConfig, $chooserBlock);
+</code></pre><p><strong>Data representation</strong></p><table><thead><tr><th>Chooser</th><th>Format</th><th>Example</th></tr></thead><tbody><tr><td>Product</td><td>product/{product_id}/{category_id} / <em>{category_id} is optional</em></td><td>product/14509 / product/14509/32</td></tr><tr><td>Category</td><td>category/{category_id}</td><td>category/22</td></tr><tr><td>CMS Page</td><td>{cms_page_id}</td><td>7</td></tr><tr><td>Static Block</td><td>{static_block_id}</td><td>3</td></tr><tr><td>Custom</td><td>N/A</td><td>N/A</td></tr></tbody></table><p><a href="https://github.com/SessionDE/Jarlssen_ChooserWidget" class="btn btn-info btn-block">Extension on GitHub</a></p></div><div class="row"><a href="http://magecode.xyz/tags/adminhtml" class="badge">adminhtml</a>, <a href="http://magecode.xyz/tags/widget" class="badge">widget</a>, <a href="http://magecode.xyz/tags/form" class="badge">form</a></div><div class="row"> Author: <a href="http://ceckoslab.com/" rel="nofollow" target="_blank">Tsvetan Stoychev</a></div><div class="row"><a href="//twitter.com/share" class="twitter-share-button" data-url="http://magecode.xyz/2015/12/17/magento-chooser-widget-in-adminhtml-forms" data-via="magecode_xyz" data-counturl="http://magecode.xyz/2015/12/17/magento-chooser-widget-in-adminhtml-forms">Tweet</a><div class="g-plusone" data-size="medium"></div><div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div><div id="fb-root"></div></div><nav><ul class="pagination"><li><a href="http://magecode.xyz/2015/12/17/load-single-product-attribute-vs-load-entire-product" aria-label="Previous: Load single product attribute vs. load entire product"><span aria-hidden="true">&laquo; Load single product attribute vs. load entire product</span></a></li></ul></nav></article><div id="disqus_thread"></div><script type="text/javascript">;var disqus_shortname='magecode';(function(){var e=document.createElement('script');e.type='text/javascript';e.async=!0;e.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(e)})();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div></div></div></div></div><link href="http://magecode.xyz/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="http://magecode.xyz/components/highlightjs/styles/github.css" /><link href="http://magecode.xyz/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link href="http://magecode.xyz/css/style.css" rel="stylesheet" type="text/css" /><script src="http://magecode.xyz/components/jquery/jquery.min.js"></script><script src="http://magecode.xyz/components/bootstrap/js/bootstrap.min.js"></script><script src="http://magecode.xyz/components/highlightjs/highlight.pack.js"></script><script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>hljs.initHighlightingOnLoad();</script><script type="text/javascript">(function(t,o,c,s,e,a,n){t['GoogleAnalyticsObject']=e;t[e]=t[e]||function(){(t[e].q=t[e].q||[]).push(arguments)},t[e].l=1*new Date();a=o.createElement(c),n=o.getElementsByTagName(c)[0];a.async=1;a.src=s;n.parentNode.insertBefore(a,n)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-66233712-1','auto');ga('send','pageview');</script><script>;$('#menu-toggle').click(function(e){e.preventDefault();$('#wrapper').toggleClass('toggled')});</script><script>(function(t,c,a){var e,n=t.getElementsByTagName(c)[0];if(t.getElementById(a)){return};e=t.createElement(c);e.id=a;e.async=!0;e.src='//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1';n.parentNode.insertBefore(e,n)}(document,'script','facebook-jssdk'));</script><script type="text/javascript">(function(){var e=document.createElement('script');e.type='text/javascript';e.async=!0;e.src='https://apis.google.com/js/plusone.js';var t=document.getElementsByTagName('script')[0];t.parentNode.insertBefore(e,t)})();</script><script type="text/javascript">(function(){var t=document.createElement('script');t.type='text/javascript';t.async=!0;t.src='//platform.twitter.com/widgets.js';document.getElementsByTagName('head')[0].appendChild(t)})();</script><script type="text/javascript">;$(document).ready(function(){$('table').addClass('table table-bordered table-hover')});</script></body></html>

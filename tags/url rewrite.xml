@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[MageCode]]></title>
+    <link href="http://magecode.xyz/atom.xml" rel="self"/>
+    <link href="http://magecode.xyz/"/>
+    <updated>2015-12-17T19:18:02+00:00</updated>
+    <id>http://magecode.xyz/</id>
+    <author>
+        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+    <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[An error occurred while saving the URL rewrite]]></title>
+            <link href="http://magecode.xyz/2015/12/17/url-indexer-duplicate-records-problem"/>
+            <updated>2015-12-17T00:00:00+00:00</updated>
+            <id>http://magecode.xyz/2015/12/17/url-indexer-duplicate-records-problem</id>
+            <author>
+                <name> Tsvetan Stoychev </name>
+            </author>
+            <content type="html"><![CDATA[<p>Last few weeks I was fighting with problem that partially broke Magento url indexer.
+Basically the url indexer was working but at certain point it was breaking.
+At this point I was getting exception and not all url rewrites were written to core_url_rewrite table.
+Everyday the problem was getting bigger and bigger because all new products contained “catalog/product/view/id”
+(I call those urls – “ugly” urls) but the desired urls suppose to be human readable and end with “.html”.</p>
+
+<p>This issue could be reproduced only on live environment and in order to reproduce it locally
+I had to copy all catalog tables (<code>catalog_*</code>) and <code>core_url_rewrite</code> table from live to local environment.</p>
+
+<p>When I run Magento url indexer from command line I got:</p>
+
+<pre><code>php shell/indexer.php --reindex catalog_url
+An error occurred while saving the URL rewrite
+</code></pre>
+
+<p>In Magento exception log I had:</p>
+
+<pre><code>exception 'PDOException' with message 'SQLSTATE[23000]:
+Integrity constraint violation: 1062 Duplicate entry 'product/2469/361-1-1'
+for key 'UNQ_CORE_URL_REWRITE_ID_PATH_IS_SYSTEM_STORE_ID''
+</code></pre>
+
+
+   <p><a href="http://magecode.xyz/2015/12/17/url-indexer-duplicate-records-problem" class="btn btn-info pull-right">Read more &raquo;</a></p>
+]]></content>
+        </entry>
+    </feed>
