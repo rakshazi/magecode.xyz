@@ -3,11 +3,29 @@
     <title><![CDATA[MageCode]]></title>
     <link href="http://magecode.xyz/atom.xml" rel="self"/>
     <link href="http://magecode.xyz/"/>
-    <updated>2015-12-18T11:43:57+00:00</updated>
+    <updated>2015-12-18T13:55:54+00:00</updated>
     <id>http://magecode.xyz/</id>
     <author>
         <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
     <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Disable Magento Full Page Cache for block]]></title>
+            <link href="http://magecode.xyz/2015/12/18/magento-disable-fpc-for-block"/>
+            <updated>2015-12-18T00:00:00+00:00</updated>
+            <id>http://magecode.xyz/2015/12/18/magento-disable-fpc-for-block</id>
+            <author>
+                <name> Nikita Cherniy </name>
+            </author>
+            <content type="html"><![CDATA[<p>Magento Enterprise Edition Full Page Cache is a great feature that significantly improves the frontend performance.
+Nevertheless, it is causing the troubles with the customisations that require the dynamic content output.
+As you may know, the customer and cart information custom outputs are the first “victims” there, especially,
+if you migrated your Magento store from Community to Enterprise Edition.
+Some of the custom solutions, as well as the Mage Store modules, may not be ready for such migration.
+This brief article will not only show how to avoid a separate block caching in FPC, but also uncover the way how it works.
+
+   <p><a href="http://magecode.xyz/2015/12/18/magento-disable-fpc-for-block" class="btn btn-info pull-right">Read more &raquo;</a></p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Magento chooser widget in adminhtml forms]]></title>
             <link href="http://magecode.xyz/2015/12/17/magento-chooser-widget-in-adminhtml-forms"/>

@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><title>Disable Magento Full Page Cache for block &mdash; MageCode &mdash; Taming Magento.</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:type" content="article" /><meta property="og:url" content="http://magecode.xyz//2015/12/18/magento-disable-fpc-for-block" /><meta property="og:title" content="Disable Magento Full Page Cache for block" /><meta property="og:description" content="Magento Enterprise Edition Full Page Cache is a great feature that significantly improves the frontend performance. Nevertheless, it is causing the tr" /><meta property="og:article:published_time" content="1450396800" /><meta property="og:article:author" content="Nikita Cherniy" /><meta property="og:article:section" content="Technology" /><meta property="og:article:tag" content="fixed" /><meta property="og:article:tag" content="EE" /><meta property="og:article:tag" content="FPC" /><meta property="og:article:tag" content="cache" /><meta property="og:article:tag" content="config" /><meta property="og:image" content="http://magecode.xyz/media/logo.png" /><link rel="alternate" type="application/atom+xml" href="http://magecode.xyz/atom.xml" title="MageCode activity feed" /></head><body><div id="wrapper"><!-- Sidebar --><!-- --- use: - posts_categories --- --><div id="sidebar-wrapper"><ul class="sidebar-nav"><!-- <li class="sidebar-brand"><a href="/">MageCode</a></li> --><li><a href="http://magecode.xyz/categories/extensions">Extensions</a></li><li><a href="http://magecode.xyz/categories/perfomance">Perfomace</a></li><li><a href="http://magecode.xyz/categories/fixed">Fixed</a></li><li><a href="http://magecode.xyz/categories/orders">Orders</a></li><form action="http://www.google.com" id="cse-search-box" target="_blank"><div><fieldset role="search"><input type="hidden" name="cx" value="partner-pub-5549091042676165:3410918337" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" class="search form-control" name="q"/><!--<input type="submit" name="sa" value="Search" />--></fieldset></div></form><li class="social-links"><a href="https://facebook.com/magecode.xyz" target="_blank" title="Facebook"><i class="fa fa-facebook-square"></i></a><a href="https://medium.com/@nikus" target="_blank" title="Medium"><i class="fa fa-medium"></i></a><a href="https://twitter.com/magecode_xyz" target="_blank" title="Twitter"><i class="fa fa-twitter-square"></i></a><a href="http://magecode.xyz/atom.xml" target="_blank" title="RSS feed"><i class="fa fa-rss-square"></i></a></li><li><a href="http://magecode.xyz/send">Send post</a></li><li><a href="http://magecode.xyz/donate"><b>Donate</b></a></li><!-- --><ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5549091042676165" data-ad-slot="2814305939"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></ul></div><div id="page-content-wrapper"><div class="container-fluid"><div class="col-md-12"><div class="row"><h1><a href="#menu-toggle" class="btn btn-default btn-lg" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span></a> MageCode <small>Taming Magento.</small></h1></div><div class="row"><article><header><h2> Disable Magento Full Page Cache for block <small><a href="http://magecode.xyz/categories/fixed">#fixed</a></small></h2></header><div><p>Magento Enterprise Edition Full Page Cache is a great feature that significantly improves the frontend performance. Nevertheless, it is causing the troubles with the customisations that require the dynamic content output. As you may know, the customer and cart information custom outputs are the first “victims” there, especially, if you migrated your Magento store from Community to Enterprise Edition. Some of the custom solutions, as well as the Mage Store modules, may not be ready for such migration. This brief article will not only show how to avoid a separate block caching in FPC, but also uncover the way how it works. <!-- break --></p><h4 id="step-1.-create-cache.xml-in-%27etc%27-directory-of-your-extension">Step 1. Create cache.xml in 'etc' directory of your extension</h4><pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;config&gt;
+    &lt;placeholders&gt;
+        &lt;any_random_generated_string_as_unique_id&gt; &lt;!--eg: magecode_html_page_header --&gt;
+            &lt;block&gt;module_name/block_name&lt;/block&gt;&lt;!--eg: html/page_header --&gt;
+            &lt;name&gt;block_name_in_layout_xmls&lt;/name&gt; &lt;!--eg: header --&gt;
+            &lt;template&gt;path/to/your/template/file.phtml&lt;/template&gt; &lt;!--eg: page/html/header.phtml --&gt;
+            &lt;placeholder&gt;any_random_generated_string_as_unique_id&lt;/placeholder&gt; &lt;!--eg: magecode_html_page_header --&gt;
+            &lt;container&gt;Module_Name_Model_Caching_Container_Blockname&lt;/container&gt; &lt;!--eg: Magecode_Html_Model_Caching_Container_Header --&gt;
+            &lt;cache_lifetime&gt;86400&lt;/cache_lifetime&gt; &lt;!-- lifetime in seconds, to disable cache just comment this line --&gt;
+        &lt;/any_random_generated_string_as_unique_id&gt;
+    &lt;/placeholders&gt;
+&lt;/config&gt;
+</code></pre><h4 id="step-2.-create-caching-container-model-for-your-block">Step 2. Create caching container model for your block</h4><pre><code class="php">&lt;?php
+
+class Magecode_Html_Model_Caching_Container_Header extends Enterprise_PageCache_Model_Container_Abstract
+{
+    /**
+     * Get container individual cache id
+     *
+     * @return string
+     */
+    protected function _getCacheId()
+    {
+        return 'MAGECODE_HTML_HEADER' . $this-&gt;_getIdentifier();
+    }
+
+    /**
+     * Get unique identifier for cache id
+     *
+     * @return mixed
+     */
+    protected function _getIdentifier()
+    {
+        return microtime();
+    }
+
+    /**
+     * Array of child block for selected block
+     * @var array
+     */
+    public $childBlocks = array(
+        'top.links',
+        'store_language',
+        'top.menu',
+        'catalog.topnav',
+        'top.container'
+    );
+
+    /**
+     * Render block content
+     *
+     * @return string
+     */
+    protected function _renderBlock()
+    {
+        $block = $this-&gt;_getPlaceHolderBlock();
+        foreach ($this-&gt;childBlocks as $child) {
+            $block-&gt;setChild($child, Mage::app()-&gt;getLayout()-&gt;getBlock($child));
+        }
+
+        return $block-&gt;toHtml();
+    }
+
+    /**
+     * Save data to cache storage
+     *
+     * @param string $data
+     * @param string $id
+     * @param array $tags
+     * @param null|int $lifetime
+     * @return bool
+     */
+    protected function _saveCache($data, $id, $tags = array(), $lifetime = null)
+    {
+        return false;
+    }
+}
+</code></pre><blockquote><p><strong>Important</strong>: don't forget to change <code>$childBlocks</code> array to your block childs or them will not be rendered!</p></blockquote><p>After that your block will be rendered every time without caching it.</p><blockquote><p>Idea for this article was got from <a href="http://www.atwix.com/magento/exclude-block-from-full-page-cache/">Atwix article</a>, but they wrote too many words and with bug in container model.</p></blockquote></div><div class="row"><a href="http://magecode.xyz/tags/EE" class="badge">EE</a>, <a href="http://magecode.xyz/tags/FPC" class="badge">FPC</a>, <a href="http://magecode.xyz/tags/cache" class="badge">cache</a>, <a href="http://magecode.xyz/tags/config" class="badge">config</a></div><div class="row"> Author: <a href="https://about.me/nikus" rel="nofollow" target="_blank">Nikita Cherniy</a></div><div class="row"><a href="//twitter.com/share" class="twitter-share-button" data-url="http://magecode.xyz/2015/12/18/magento-disable-fpc-for-block" data-via="magecode_xyz" data-counturl="http://magecode.xyz/2015/12/18/magento-disable-fpc-for-block">Tweet</a><div class="g-plusone" data-size="medium"></div><div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div><div id="fb-root"></div></div><nav><ul class="pagination"><li><a href="http://magecode.xyz/2015/12/17/magento-chooser-widget-in-adminhtml-forms" aria-label="Previous: Magento chooser widget in adminhtml forms"><span aria-hidden="true">&laquo; Magento chooser widget in adminhtml forms</span></a></li></ul></nav></article><div id="disqus_thread"></div><script type="text/javascript">;var disqus_shortname='magecode';(function(){var e=document.createElement('script');e.type='text/javascript';e.async=!0;e.src='//'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(e)})();</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div></div></div></div></div><link href="http://magecode.xyz/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="http://magecode.xyz/components/highlightjs/styles/github.css" /><link href="http://magecode.xyz/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link href="http://magecode.xyz/css/style.css" rel="stylesheet" type="text/css" /><script src="http://magecode.xyz/components/jquery/jquery.min.js"></script><script src="http://magecode.xyz/components/bootstrap/js/bootstrap.min.js"></script><script src="http://magecode.xyz/components/highlightjs/highlight.pack.js"></script><script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>hljs.initHighlightingOnLoad();</script><script type="text/javascript">(function(t,o,c,s,e,a,n){t['GoogleAnalyticsObject']=e;t[e]=t[e]||function(){(t[e].q=t[e].q||[]).push(arguments)},t[e].l=1*new Date();a=o.createElement(c),n=o.getElementsByTagName(c)[0];a.async=1;a.src=s;n.parentNode.insertBefore(a,n)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-66233712-1','auto');ga('send','pageview');</script><script>;$('#menu-toggle').click(function(e){e.preventDefault();$('#wrapper').toggleClass('toggled')});</script><script>(function(t,c,a){var e,n=t.getElementsByTagName(c)[0];if(t.getElementById(a)){return};e=t.createElement(c);e.id=a;e.async=!0;e.src='//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1';n.parentNode.insertBefore(e,n)}(document,'script','facebook-jssdk'));</script><script type="text/javascript">(function(){var e=document.createElement('script');e.type='text/javascript';e.async=!0;e.src='https://apis.google.com/js/plusone.js';var t=document.getElementsByTagName('script')[0];t.parentNode.insertBefore(e,t)})();</script><script type="text/javascript">(function(){var t=document.createElement('script');t.type='text/javascript';t.async=!0;t.src='//platform.twitter.com/widgets.js';document.getElementsByTagName('head')[0].appendChild(t)})();</script><script type="text/javascript">;$(document).ready(function(){$('table').addClass('table table-bordered table-hover')});</script></body></html>
