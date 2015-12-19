@@ -1,7 +1,5 @@
 {
     "require": {
-        "components/bootstrap": "~3.3.6",
-        "components/jquery": "~2.1.4",
         "components/highlightjs": "~7.3.0",
         "components/font-awesome": "~4.5.0",
         "dflydev/embedded-composer-console": "@dev",

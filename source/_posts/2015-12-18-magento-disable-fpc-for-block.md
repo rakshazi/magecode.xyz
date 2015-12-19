@@ -25,11 +25,9 @@ This brief article will not only show how to avoid a separate block caching in F
     <placeholders>
         <any_random_generated_string_as_unique_id> <!--eg: magecode_html_page_header -->
             <block>module_name/block_name</block><!--eg: html/page_header -->
-            <name>block_name_in_layout_xmls</name> <!--eg: header -->
-            <template>path/to/your/template/file.phtml</template> <!--eg: page/html/header.phtml -->
             <placeholder>any_random_generated_string_as_unique_id</placeholder> <!--eg: magecode_html_page_header -->
             <container>Module_Name_Model_Caching_Container_Blockname</container> <!--eg: Magecode_Html_Model_Caching_Container_Header -->
-            <cache_lifetime>86400</cache_lifetime> <!-- lifetime in seconds, to disable cache just comment this line -->
+            <cache_lifetime><s>null</s></cache_lifetime> <!-- lifetime in seconds, <s>null</s> means disable cache for this placeholder -->
         </any_random_generated_string_as_unique_id>
     </placeholders>
 </config>
@@ -49,7 +47,7 @@ class Magecode_Html_Model_Caching_Container_Header extends Enterprise_PageCache_
      */
     protected function _getCacheId()
     {
-        return 'MAGECODE_HTML_HEADER' . $this->_getIdentifier();
+        return 'MAGECODE_HEADER_' . md5($this->_placeholder->getAttribute('cache_id'));
     }
 
     /**
@@ -68,7 +66,6 @@ class Magecode_Html_Model_Caching_Container_Header extends Enterprise_PageCache_
      */
     public $childBlocks = array(
         'top.links',
-        'store_language',
         'top.menu',
         'catalog.topnav',
         'top.container'
@@ -86,21 +83,9 @@ class Magecode_Html_Model_Caching_Container_Header extends Enterprise_PageCache_
             $block->setChild($child, Mage::app()->getLayout()->getBlock($child));
         }
 
-        return $block->toHtml();
-    }
+        Mage::dispatchEvent('render_block', array('block' => $block, 'placeholder' => $this->_placeholder));
 
-    /**
-     * Save data to cache storage
-     *
-     * @param string $data
-     * @param string $id
-     * @param array $tags
-     * @param null|int $lifetime
-     * @return bool
-     */
-    protected function _saveCache($data, $id, $tags = array(), $lifetime = null)
-    {
-        return false;
+        return $block->toHtml();
     }
 }
 ~~~

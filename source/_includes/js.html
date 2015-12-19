@@ -1,6 +1,4 @@
 {% block scripts %}{% endblock %}
-<script src="{{ site.url }}/components/jquery/jquery.min.js"></script>
-<script src="{{ site.url }}/components/bootstrap/js/bootstrap.min.js"></script>
 <script src="{{ site.url }}/components/highlightjs/highlight.pack.js"></script>
 {% if site.services.adsense.search %}<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>{% endif %}
 {% if site.services.adsense.enabled %}<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>{% endif %}
@@ -18,8 +16,7 @@
 {% endif %}
 
 <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+    document.getElementById("menu-toggle").addEventListener( 'click', function(){
+        document.getElementById("wrapper").classList.toggle('toggled');
     });
 </script>

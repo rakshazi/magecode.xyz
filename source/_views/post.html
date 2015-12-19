@@ -140,8 +140,12 @@
   </script>
 
   <script type="text/javascript">
-    $(document).ready(function(){
-        $('table').addClass('table table-bordered table-hover');
-    });
+  var tables = document.getElementsByTagName('table');
+  for(var i=0; i < tables.length; i++)
+  {
+      tables[i].classList.add('table');
+      tables[i].classList.add('table-bordered');
+      tables[i].classList.add('table-hover');
+  }
   </script>
 {% endblock%}
