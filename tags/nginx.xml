@@ -3,7 +3,7 @@
     <title><![CDATA[MageCode]]></title>
     <link href="http://magecode.xyz/atom.xml" rel="self"/>
     <link href="http://magecode.xyz/"/>
-    <updated>2016-01-04T12:12:56+00:00</updated>
+    <updated>2016-05-24T08:46:29+00:00</updated>
     <id>http://magecode.xyz/</id>
     <author>
         <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
@@ -18,8 +18,9 @@
             </author>
             <content type="html"><![CDATA[<p>HTTP/2 and Let's Encrypt free SSL certificates are ready for production now.</p>
 
-<p>Here I want to describe you, how to use Nginx with Let's Encrypt certificate (with A+ rank on SSLLabs) and HTTP/2 on Ubuntu 14.04.xx
-<!--break--></p>
+<p>Here I want to describe you, how to use Nginx with Let's Encrypt certificate (with A+ rank on SSLLabs) and HTTP/2 on Ubuntu 14.04.xx</p>
+
+<!--break-->
 
 <blockquote>
   <p>All actions in console must be under <strong>root</strong> user (call <em>sudo su</em> before start)</p>

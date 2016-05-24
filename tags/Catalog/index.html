@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>#ORM - MageCode  &mdash; MageCode &mdash; Taming Magento.</title>
+        <title>#Catalog - MageCode  &mdash; MageCode &mdash; Taming Magento.</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <meta property="og:type" content="website" />
@@ -9,7 +9,7 @@
             <meta property="og:title" content="MageCode" />
             <meta property="og:description" content="Taming Magento." />
                 <meta property="og:image" content="http://magecode.xyz/media/logo.png" />
-            <link rel="alternate" type="application/atom+xml" href="http://magecode.xyz/tags/ORM.xml" title="MageCode 'ORM' tag feed" />
+            <link rel="alternate" type="application/atom+xml" href="http://magecode.xyz/tags/Catalog.xml" title="MageCode 'Catalog' tag feed" />
                                     </head>
     <body>
         <div id="wrapper">
@@ -62,46 +62,34 @@ use:
                              <small>Taming Magento.</small>                         </h1>
                     </div>
                     <div class="row">
-                        <h2>#ORM</h2>
+                        <h2>#Catalog</h2>
     <article>
         <header>
             <h2>
-                <a href="http://magecode.xyz/2015/12/17/load-single-product-attribute-vs-load-entire-product">Load single product attribute vs. load entire product</a>
+                <a href="http://magecode.xyz/2016/05/24/301-redirects-from-product-url-duplicates">301 redirect from product url duplicates</a>
                                     <small>
-                                                    <a href="http://magecode.xyz/categories/perfomance">#perfomance</a>
+                                                    <a href="http://magecode.xyz/categories/fixed">#fixed</a>
                                                                         </small>
                             </h2>
         </header>
         <div>
-            <p>Let’s assume that as developer you are in following situation:
-You know a product id and you have to fetch single attribute value of a product which id you already know.
-For example let’s try to get color attribute of Magento product.</p>
+            <p>Magento allow you to create multiple urls for one product page, for example:</p>
 
-<p><strong>Question</strong>: How would you do it?
-Are you going to load the product or you would look for more efficient solutions in order to fetch only the attribute you are looking for?</p>
+<pre><code>http://example.com/product.html
+http://example.com/category1/product.html
+http://example.com/great-sale-2016/product.html
+</code></pre>
 
-<p>Magento allows us to fetch product attribute in many ways and depending on the context we could choose one.
-I am definitely against loading entire product in case there are much more efficient solutions and the goal is to fetch single product attribute
-(not all product attributes).</p>
+<p>Some SEO specialists say that it's very bad for SEO, thats why you need create 301 redirect from all product urls, except main url (<code>http://example.com/product.html</code>).</p>
 
-<p>I think that people choose the easy way because:</p>
+<p>Here you can find solution in 5 strings of code which will redirect customers from any additional product url to main url.</p>
 
-<ul>
-<li>People read the first answer (which sometimes is not the most efficient) in StackOverflow but don’t check other answers.</li>
-<li>There is a lack of Magento documentation.</li>
-<li>Missing out of the box way how to accomplish the task.</li>
-<li>There are many examples in Internet but they are not descriptive enough to explain what happens on background and how efficient they are.</li>
-</ul>
 
-<p>As first example,
-I would like to start with one of the efficient ways because I know many people would copy / paste this solution in their project,
-stop reading and continue with their daily work.
-
-   <p><a href="http://magecode.xyz/2015/12/17/load-single-product-attribute-vs-load-entire-product" class="btn btn-info pull-right">Read more &raquo;</a></p>
+   <p><a href="http://magecode.xyz/2016/05/24/301-redirects-from-product-url-duplicates" class="btn btn-info pull-right">Read more &raquo;</a></p>
         </div>
-                                    <a href="http://magecode.xyz/tags/EAV" class="badge">EAV</a>,                             <a href="http://magecode.xyz/tags/attributes" class="badge">attributes</a>,                             <a href="http://magecode.xyz/tags/collections" class="badge">collections</a>,                             <a href="http://magecode.xyz/tags/database" class="badge">database</a>,                             <a href="http://magecode.xyz/tags/ORM" class="badge">ORM</a>                        </article>
+                                    <a href="http://magecode.xyz/tags/SEO" class="badge">SEO</a>,                             <a href="http://magecode.xyz/tags/Catalog" class="badge">Catalog</a>,                             <a href="http://magecode.xyz/tags/URL" class="badge">URL</a>                        </article>
     Author:
-            <a href="http://ceckoslab.com/" rel="nofollow" target="_blank">Tsvetan Stoychev</a>
+            <a href="https://about.me/nikus" rel="nofollow" target="_blank">Nikita Cherniy</a>
     
                     </div>
                 </div>

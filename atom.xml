@@ -3,11 +3,34 @@
     <title><![CDATA[MageCode]]></title>
     <link href="http://magecode.xyz/atom.xml" rel="self"/>
     <link href="http://magecode.xyz/"/>
-    <updated>2016-01-04T12:12:55+00:00</updated>
+    <updated>2016-05-24T08:46:28+00:00</updated>
     <id>http://magecode.xyz/</id>
     <author>
         <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
     <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[301 redirect from product url duplicates]]></title>
+            <link href="http://magecode.xyz/2016/05/24/301-redirects-from-product-url-duplicates"/>
+            <updated>2016-05-24T00:00:00+00:00</updated>
+            <id>http://magecode.xyz/2016/05/24/301-redirects-from-product-url-duplicates</id>
+            <author>
+                <name> Nikita Cherniy </name>
+            </author>
+            <content type="html"><![CDATA[<p>Magento allow you to create multiple urls for one product page, for example:</p>
+
+<pre><code>http://example.com/product.html
+http://example.com/category1/product.html
+http://example.com/great-sale-2016/product.html
+</code></pre>
+
+<p>Some SEO specialists say that it's very bad for SEO, thats why you need create 301 redirect from all product urls, except main url (<code>http://example.com/product.html</code>).</p>
+
+<p>Here you can find solution in 5 strings of code which will redirect customers from any additional product url to main url.</p>
+
+
+   <p><a href="http://magecode.xyz/2016/05/24/301-redirects-from-product-url-duplicates" class="btn btn-info pull-right">Read more &raquo;</a></p>
+]]></content>
+        </entry>
             <entry>
             <title type="html"><![CDATA[Web server with Nginx, Letsencrypt SSL, and HTTP/2]]></title>
             <link href="http://magecode.xyz/2016/01/04/nginx-letsencrypt-http2"/>
@@ -18,8 +41,9 @@
             </author>
             <content type="html"><![CDATA[<p>HTTP/2 and Let's Encrypt free SSL certificates are ready for production now.</p>
 
-<p>Here I want to describe you, how to use Nginx with Let's Encrypt certificate (with A+ rank on SSLLabs) and HTTP/2 on Ubuntu 14.04.xx
-<!--break--></p>
+<p>Here I want to describe you, how to use Nginx with Let's Encrypt certificate (with A+ rank on SSLLabs) and HTTP/2 on Ubuntu 14.04.xx</p>
+
+<!--break-->
 
 <blockquote>
   <p>All actions in console must be under <strong>root</strong> user (call <em>sudo su</em> before start)</p>
