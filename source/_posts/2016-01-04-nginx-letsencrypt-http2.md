@@ -13,6 +13,7 @@ tags:
 HTTP/2 and Let's Encrypt free SSL certificates are ready for production now. 
 
 Here I want to describe you, how to use Nginx with Let's Encrypt certificate (with A+ rank on SSLLabs) and HTTP/2 on Ubuntu 14.04.xx
+
 <!--break-->
 
 > All actions in console must be under **root** user (call _sudo su_ before start)
