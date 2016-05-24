@@ -12,12 +12,6 @@ if [ "$TRAVIS_REPO_SLUG" == $REPO_SLUG ]; then
   git clone --quiet --depth=1 --branch=gh-pages https://${GH_TOKEN}@github.com/${REPO_SLUG} gh-pages > /dev/null
   if [ $? -ne 0 ]; then echo -e "\e[31mCould not clone the repository\e[m"; exit 1; fi
 
-  echo -e "\e[32mGenerating site....\n\e[m"
-  curl -sSO https://download.sculpin.io/sculpin.phar
-  chmod +x ./sculpin.phar
-  ./sculpin.phar generate --env=prod
-  rm -f ./sculpin.phar
-
   echo -e "\e[32mSyncronizing content...\n\e[m"
   rsync -rtv --delete ./output_prod/* ./gh-pages
   if [ $? -ne 0 ]; then echo -e "\e[31mCould not sync directories\e[m"; exit 1; fi

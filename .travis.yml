@@ -12,6 +12,9 @@ before_script:
 - composer self-update
 - composer install
 script:
-- "./vendor/bin/sculpin generate --env=prod --url=http://magecode.xyz"
+- "curl -sSO https://download.sculpin.io/sculpin.phar"
+- "chmod +x ./sculpin.phar"
+- "./sculpin.phar generate --env=prod --url=http://magecode.xyz"
+- "rm -f ./sculpin.phar"
 after_success:
 - "./publish.sh"
