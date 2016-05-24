@@ -3,10 +3,10 @@
     <title><![CDATA[MageCode]]></title>
     <link href="http://magecode.xyz/atom.xml" rel="self"/>
     <link href="http://magecode.xyz/"/>
-    <updated>2016-05-24T08:46:29+00:00</updated>
+    <updated>2016-05-24T09:32:33+00:00</updated>
     <id>http://magecode.xyz/</id>
     <author>
-        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+        <name><![CDATA[Nikita Chernyi]]></name>            </author>
     <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Compatibility extension for Magento 1 and PHP 7]]></title>

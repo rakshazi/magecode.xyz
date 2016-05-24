@@ -3,10 +3,10 @@
     <title><![CDATA[MageCode]]></title>
     <link href="http://magecode.xyz/atom.xml" rel="self"/>
     <link href="http://magecode.xyz/"/>
-    <updated>2016-05-24T08:46:29+00:00</updated>
+    <updated>2016-05-24T09:32:32+00:00</updated>
     <id>http://magecode.xyz/</id>
     <author>
-        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+        <name><![CDATA[Nikita Chernyi]]></name>            </author>
     <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Change order status to &#039;Complete&#039;]]></title>
@@ -14,7 +14,7 @@
             <updated>2015-08-09T00:00:00+00:00</updated>
             <id>http://magecode.xyz/2015/08/09/change-order-status-to-complete</id>
             <author>
-                <name> Nikita Cherniy </name>
+                <name> Nikita Chernyi </name>
             </author>
             <content type="html"><![CDATA[<p>You can easily change order status programmaticaly in Magento,
 but you can't do it freely with "Complete" status

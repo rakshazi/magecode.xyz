@@ -3,10 +3,10 @@
     <title><![CDATA[MageCode]]></title>
     <link href="http://magecode.xyz/atom.xml" rel="self"/>
     <link href="http://magecode.xyz/"/>
-    <updated>2016-05-24T08:46:29+00:00</updated>
+    <updated>2016-05-24T09:32:33+00:00</updated>
     <id>http://magecode.xyz/</id>
     <author>
-        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+        <name><![CDATA[Nikita Chernyi]]></name>            </author>
     <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Web server with Nginx, Letsencrypt SSL, and HTTP/2]]></title>
@@ -14,7 +14,7 @@
             <updated>2016-01-04T00:00:00+00:00</updated>
             <id>http://magecode.xyz/2016/01/04/nginx-letsencrypt-http2</id>
             <author>
-                <name> Nikita Cherniy </name>
+                <name> Nikita Chernyi </name>
             </author>
             <content type="html"><![CDATA[<p>HTTP/2 and Let's Encrypt free SSL certificates are ready for production now.</p>
 

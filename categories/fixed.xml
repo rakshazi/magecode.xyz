@@ -3,10 +3,10 @@
     <title><![CDATA[MageCode]]></title>
     <link href="http://magecode.xyz/atom.xml" rel="self"/>
     <link href="http://magecode.xyz/"/>
-    <updated>2016-05-24T08:46:29+00:00</updated>
+    <updated>2016-05-24T09:32:32+00:00</updated>
     <id>http://magecode.xyz/</id>
     <author>
-        <name><![CDATA[Nikita Cherniy]]></name>        <email><![CDATA[magecode.xyz@openaliasbox.org]]></email>    </author>
+        <name><![CDATA[Nikita Chernyi]]></name>            </author>
     <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[301 redirect from product url duplicates]]></title>
@@ -14,7 +14,7 @@
             <updated>2016-05-24T00:00:00+00:00</updated>
             <id>http://magecode.xyz/2016/05/24/301-redirects-from-product-url-duplicates</id>
             <author>
-                <name> Nikita Cherniy </name>
+                <name> Nikita Chernyi </name>
             </author>
             <content type="html"><![CDATA[<p>Magento allow you to create multiple urls for one product page, for example:</p>
 
@@ -37,7 +37,7 @@ http://example.com/great-sale-2016/product.html
             <updated>2015-12-18T00:00:00+00:00</updated>
             <id>http://magecode.xyz/2015/12/18/magento-disable-fpc-for-block</id>
             <author>
-                <name> Nikita Cherniy </name>
+                <name> Nikita Chernyi </name>
             </author>
             <content type="html"><![CDATA[<p>Magento Enterprise Edition Full Page Cache is a great feature that significantly improves the frontend performance.
 Nevertheless, it is causing the troubles with the customisations that require the dynamic content output.
