@@ -2,13 +2,10 @@ title: MageCode
 subtitle: Taming Magento.
 breakpoint: "<!-- break -->"
 author:
-    name: Nikita Cherniy
-    email: magecode.xyz@openaliasbox.org
+    name: Nikita Chernyi
     url: https://about.me/nikus
 
 services:
-    paypal: "rakshazi@openmailbox.org"
-    formspree: "magecode.xyz@openaliasbox.org"
     facebook: "magecode.xyz"
     medium: "nikus"
     twitter: "magecode_xyz"
@@ -16,8 +13,7 @@ services:
     ganalytics: "UA-66233712-1"
     adsense:
         enabled: true
-        search: "partner-pub-5549091042676165:3410918337"
         content:
             id: "ca-pub-5549091042676165"
             skyscraper: "2814305939"
-            #adaptive: "1794584335"
+            adaptive: "1794584335"

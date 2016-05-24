@@ -8,6 +8,8 @@ tags:
 author:
     name: "Ivan Curdinjakovic"
     url: "http://inchoo.net/author/ivan-curdinjakovic/profile/"
+use:
+    - posts_categories
 ---
 As promised,  we prepared something that will spice up your holidays better than Christmas decorations and mulled wine.
 In this article you can find **our open-source compatibility extension for Magento and PHP 7** (yes, you read that right!)

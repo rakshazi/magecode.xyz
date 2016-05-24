@@ -8,6 +8,8 @@ tags:
 author:
     name: "Barry vd. Heuvel"
     url: "https://medium.com/@barryvdh"
+use:
+    - posts_categories
 ---
 There are a few ways to handle Magento extensions, for example:
 

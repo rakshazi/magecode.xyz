@@ -5,6 +5,8 @@ categories:
     - extensions
 tags:
     - snippet
+use:
+    - posts_categories
 ---
 
 ### What is it?

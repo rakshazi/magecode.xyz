@@ -28,12 +28,15 @@
                 <div class="col-md-12">
                     <div class="row">
                         <h1>
-                            <a href="#menu-toggle" class="btn btn-default btn-lg" id="menu-toggle">
-                                <span class="fa fa-bars"></span>
-                            </a>
-                            {{ site.title }}
+                            <a href="{{ site.url }}/">{{ site.title }}</a>
                             {% if site.subtitle %} <small>{{ site.subtitle }}</small> {% endif %}
+                            <small>{% include "social.html" %}</small>
                         </h1>
+                    </div>
+                    <div class="row">
+                        {% for category,posts in data.posts_categories %}
+                            <a href="{{ site.url }}/categories/{{ category|url_encode(true) }}" class="btn btn-default">{{ category }}</a>
+                        {% endfor %}
                     </div>
                     <div class="row">
                         {% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}

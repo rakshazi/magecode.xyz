@@ -10,6 +10,8 @@ tags:
 author:
     name: "Tsvetan Stoychev"
     url: "http://ceckoslab.com/"
+use:
+    - posts_categories
 ---
 Last few weeks I was fighting with problem that partially broke Magento url indexer.
 Basically the url indexer was working but at certain point it was breaking.

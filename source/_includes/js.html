@@ -1,6 +1,5 @@
 {% block scripts %}{% endblock %}
 <script src="{{ site.url }}/components/highlightjs/highlight.pack.js"></script>
-{% if site.services.adsense.search %}<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>{% endif %}
 {% if site.services.adsense.enabled %}<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>{% endif %}
 <script>hljs.initHighlightingOnLoad();</script>
 {% if site.services.ganalytics %}
@@ -16,7 +15,8 @@
 {% endif %}
 
 <script>
-    document.getElementById("menu-toggle").addEventListener( 'click', function(){
-        document.getElementById("wrapper").classList.toggle('toggled');
-    });
+    var images = document.getElementsByTagName("img");
+    for(var i = 0; i < images.length; i++) {
+        images[i].className += " img-responsive img-rounded";
+    }
 </script>

@@ -8,9 +8,11 @@ tags:
     - nginx
     - ssl
     - http2
---- 
+use:
+    - posts_categories
+---
 
-HTTP/2 and Let's Encrypt free SSL certificates are ready for production now. 
+HTTP/2 and Let's Encrypt free SSL certificates are ready for production now.
 
 Here I want to describe you, how to use Nginx with Let's Encrypt certificate (with A+ rank on SSLLabs) and HTTP/2 on Ubuntu 14.04.xx
 
@@ -66,7 +68,7 @@ Open your site config (default is `/etc/nginx/sites-enabled/default`) and replac
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Robots-Tag none;
-    
+
     # ...
 
 #}

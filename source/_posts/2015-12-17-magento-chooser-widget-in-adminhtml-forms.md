@@ -10,6 +10,8 @@ tags:
 author:
     name: "Tsvetan Stoychev"
     url: "http://ceckoslab.com/"
+use:
+    - posts_categories
 ---
 ![Product chooser](/media/posts/2015-12-17-magento-chooser-widget-in-adminhtml-forms/chooser.png)
 

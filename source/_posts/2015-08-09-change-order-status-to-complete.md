@@ -5,6 +5,8 @@ categories:
     - orders
 tags:
     - snippet
+use:
+    - posts_categories
 ---
 
 You can easily change order status programmaticaly in Magento,

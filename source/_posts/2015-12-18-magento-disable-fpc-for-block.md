@@ -8,6 +8,8 @@ tags:
     - FPC
     - cache
     - config
+use:
+    - posts_categories
 ---
 Magento Enterprise Edition Full Page Cache is a great feature that significantly improves the frontend performance.
 Nevertheless, it is causing the troubles with the customisations that require the dynamic content output.

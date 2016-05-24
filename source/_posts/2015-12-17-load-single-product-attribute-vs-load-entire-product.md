@@ -12,6 +12,8 @@ tags:
 author:
     name: "Tsvetan Stoychev"
     url: "http://ceckoslab.com/"
+use:
+    - posts_categories
 ---
 
 Let’s assume that as developer you are in following situation:
