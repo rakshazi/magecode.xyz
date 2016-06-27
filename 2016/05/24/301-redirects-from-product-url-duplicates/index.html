@@ -88,8 +88,8 @@ http://example.com/great-sale-2016/product.html
     /////////////////////////////////////// START WITH 301 REDIRECT
     $product = Mage::getModel('catalog/product')-&gt;load($productId);
     $currentURL = Mage::helper('core/url')-&gt;getCurrentUrl(); //Because Mage::getUrl() will return base product url
-    if($currentURL != $product-&gt;getProductUrl()) { //eg: http://example.com/category1/product.html != http://example.com/product.html
-        $this-&gt;getResponse()-&gt;setRedirect($product-&gt;getProductUrl(), 301)-&gt;sendResponse(); //Redirect to http://example.com/product.html
+    if($currentURL != $product-&gt;getProductUrl() . '?' . http_build_query($this-&gt;getRequest()-&gt;getParams())) { //eg: http://example.com/category1/product.html != http://example.com/product.html
+        $this-&gt;getResponse()-&gt;setRedirect($product-&gt;getProductUrl() . '?' . http_build_query($this-&gt;getRequest()-&gt;getParams()), 301)-&gt;sendResponse(); //Redirect to http://example.com/product.html
     }
     /////////////////////////////////////// END WITH 301 REDIRECT
 
