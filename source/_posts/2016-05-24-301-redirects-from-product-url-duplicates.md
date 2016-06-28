@@ -39,13 +39,16 @@ public function viewAction()
     /////////////////////////////////////// START WITH 301 REDIRECT
     $product = Mage::getModel('catalog/product')->load($productId);
     $currentURL = Mage::helper('core/url')->getCurrentUrl();
+    $getParams = '';
     $params = $this->getRequest()->getParams();
     if (isset($params['id'])) {
         unset($params['id']);
     }
-    $params = http_build_query($params);
-    if ($currentURL != $product->getProductUrl() . '?' . $params) {
-        $this->getResponse()->setRedirect($product->getProductUrl() . '?' . $params, 301)->sendResponse();
+    if ($params) {
+        $getParams = '?' . http_build_query($params);
+    }
+    if ($currentURL != $product->getProductUrl() . $getParams) {
+        $this->getResponse()->setRedirect($product->getProductUrl() . $getParams, 301)->sendResponse();
     }
     /////////////////////////////////////// END WITH 301 REDIRECT
 
